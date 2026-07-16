@@ -1,0 +1,364 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+type Lang = "en" | "ja" | "zh";
+
+const text = {
+  en: {
+    back: "Kaibo Tang",
+    home: "Home",
+    chapters: "Chapters",
+    theme: "Toggle color theme",
+    skip: "Skip to research content",
+    nav: ["Question", "Intervention", "Trial", "Outcomes", "Principles", "Timeline"],
+    kicker: "Study protocol · Behavioral economics · Digital government",
+    status: "Protocol — no results yet",
+    title: "Can better information design move an administrative procedure online?",
+    standfirst: "A pragmatic randomized controlled trial in Osaka Prefecture tests whether small, carefully designed changes to mailed renewal materials can reduce friction—without leaving anyone behind.",
+    author: "Kaibo Tang · School of Economics, The University of Osaka",
+    openPdf: "View or download on SSRN",
+    ssrn: "Back to profile",
+    scroll: "Explore the study",
+    facts: [
+      ["Setting", "Kitakawachi, Osaka Prefecture"],
+      ["Planned sample", "400–1,000 prior-year applicants"],
+      ["Allocation", "1:1 intervention vs. control"],
+      ["Design", "Pragmatic randomized controlled trial"],
+    ],
+    problem: {
+      label: "01 · The question",
+      title: "Online filing exists. Why do most eligible applicants still use post?",
+      body: "Applicants whose details have not changed can renew their motor vehicle tax exemption online. Yet preliminary FY2025 operational figures suggest that 73.7% of applicants in this group still filed by post. The study treats this gap not as a lack of motivation, but as a problem of limited attention, information design, status quo bias, and administrative burden.",
+      caveat: "73.7%",
+      caveatLabel: "postal filing among applicants recorded as having no changes in a preliminary operational tabulation; the denominator and missing-data rules will be reconfirmed before analysis.",
+      bottleneckTitle: "Three moments where friction accumulates",
+      bottlenecks: [
+        ["01", "Open", "The recipient may not recognize the mailing’s importance or urgency."],
+        ["02", "Notice", "The online option or relevant instruction sheet may never enter attention."],
+        ["03", "Switch", "Familiar paper filing may feel safer than registration and online data entry."],
+      ],
+    },
+    intervention: {
+      label: "02 · The intervention",
+      title: "One nudge package, applied at three decision points.",
+      intro: "The intervention changes only existing printed touchpoints. It does not remove the paper option or automatically enroll anyone online.",
+      items: [
+        ["Outer envelope", "Make importance and the real consequence of missing the deadline salient—without exaggeration or intimidation.", "Salience · Timely"],
+        ["Renewal form", "Place a clear prompt near the name and change-status fields so recipients reach the right instruction sheet.", "Attention · Priming"],
+        ["Instruction sheets", "Organize guidance around eligibility and preference, present online filing first when appropriate, and keep paper equally accessible.", "Easy · Presentational default"],
+      ],
+      safety: "A fourth safety prompt on the return envelope reminds applicants that postal submission is unnecessary after a completed online filing, helping prevent duplicates.",
+    },
+    trial: {
+      label: "03 · Trial design",
+      title: "A field experiment built for ordinary administrative operations.",
+      intro: "Prior-year exemption applicants in Kitakawachi will be assigned to receive either the redesigned package or conventional materials during the same filing window.",
+      control: "Conventional materials",
+      intervention: "Nudge package",
+      population: "400–1,000 applicants",
+      randomize: "Random assignment · 1:1",
+      notes: [
+        ["Pragmatic", "The intervention is delivered through the real mailing process rather than a simulated setting."],
+        ["Objective", "Filing outcomes come from administrative acceptance logs, not self-reported intention."],
+        ["Intention-to-treat", "Everyone is analyzed in the group originally assigned, whether or not they viewed the materials."],
+        ["Transparent", "The random seed, program, input-list hash, and execution time will be retained."],
+      ],
+    },
+    outcomes: {
+      label: "04 · What will be measured",
+      title: "Success means more than moving one number upward.",
+      primaryLabel: "Primary outcome",
+      primary: "On-time completion of a valid electronic application among all randomized participants.",
+      groups: [
+        ["Service continuity", "Overall on-time filing · late filing · nonfiling"],
+        ["Safety", "Duplicate applications · incomplete or returned applications"],
+        ["Process", "Days to application · inquiries · intervention fidelity"],
+        ["Equity & economics", "Effects by age, prior channel, and municipality · cost per additional online application"],
+      ],
+      interpretation: "Policy decisions will combine effect size, uncertainty, overall filing, harms, equity, and cost—not statistical significance alone.",
+    },
+    principles: {
+      label: "05 · Ethics & inclusion",
+      title: "Digital by choice, never digital by exclusion.",
+      body: "The study explicitly protects paper, telephone, in-person, and institutionally permitted assistance as substantive alternatives. It prohibits fabricated social norms, false scarcity, and excessive psychological pressure.",
+      principles: [
+        ["Freedom of choice", "Paper filing remains clearly available to everyone."],
+        ["Accessibility", "Materials will be checked for font size, contrast, plain Japanese, keyboard use, screen readers, and assistance needs."],
+        ["Privacy", "The analysis dataset will be pseudonymized; direct identifiers remain outside the research dataset."],
+        ["Preregistration", "Ethics and administrative approvals, plus OSF or AEA RCT registration, must precede randomization and mailing."],
+      ],
+    },
+    timeline: {
+      label: "06 · Planned timeline",
+      title: "From design review to public reporting.",
+      items: [
+        ["Jul–Sep 2026", "Rules verification, ethics review, cognitive interviews, materials, preregistration"],
+        ["Oct–Nov 2026", "Participant list, randomization, printing, and packing inspection"],
+        ["Nov 2026", "Simultaneous mailing of intervention and control materials"],
+        ["Dec 2026–Jan 2027", "Applications, inquiries, system issues, and adverse-event monitoring"],
+        ["Jan–Feb 2027", "Data lock, statistical analysis, cost-effectiveness, and reporting"],
+      ],
+      note: "Current status",
+      noteBody: "This manuscript is a study protocol. No randomization, intervention, or analysis of individual-level administrative data has begun, and no results are reported.",
+    },
+    citation: "Tang, Kaibo (2026). Nudge Interventions to Increase Online Filing for Annual Motor Vehicle Tax (Category-Based) Exemption Renewals.",
+    footer: "Research overview · Protocol version 1.0 · 11 July 2026",
+  },
+  ja: {
+    back: "唐 楷博",
+    home: "ホーム",
+    chapters: "目次",
+    theme: "配色を切り替える",
+    skip: "研究本文へ移動",
+    nav: ["研究課題", "介入", "試験", "評価項目", "原則", "日程"],
+    kicker: "研究プロトコル · 行動経済学 · デジタル政府",
+    status: "プロトコル — 結果は未報告",
+    title: "情報設計を改善すれば、行政手続のオンライン化は進むのか。",
+    standfirst: "大阪府の実際の行政現場で、減免更新書類への小さく慎重な変更が手続上の摩擦を減らせるかを検証します。同時に、誰も取り残さないデジタル化を評価します。",
+    author: "唐 楷博 · 大阪大学 経済学部",
+    openPdf: "SSRNで閲覧・ダウンロード",
+    ssrn: "プロフィールへ戻る",
+    scroll: "研究を見る",
+    facts: [["実施地域", "大阪府北河内地域"], ["予定標本", "前年度申請者 400–1,000人"], ["割付", "介入群・対照群 1:1"], ["研究デザイン", "実用的ランダム化比較試験"]],
+    problem: {
+      label: "01 · 研究課題",
+      title: "オンライン申請があるのに、なぜ多くの対象者は郵送を選ぶのか。",
+      body: "申告内容に変更がない対象者はオンラインで自動車税減免を更新できます。しかしFY2025の予備的な業務集計では、この層の73.7%が郵送を利用していました。本研究はこれを意欲不足ではなく、限定的注意、情報設計、現状維持バイアス、行政負担の問題として捉えます。",
+      caveat: "73.7%",
+      caveatLabel: "予備的業務集計で「変更なし」と記録された申請者の郵送利用率。分母と欠測の扱いは分析前に再確認します。",
+      bottleneckTitle: "摩擦が生じる三つの場面",
+      bottlenecks: [["01", "開封", "郵便物の重要性や緊急性に気づかない。"], ["02", "認知", "オンライン申請や該当する案内にたどり着かない。"], ["03", "転換", "登録や入力への不安から、慣れた郵送を選び続ける。"]],
+    },
+    intervention: {
+      label: "02 · 介入",
+      title: "三つの意思決定点に、一つのナッジ・パッケージを。",
+      intro: "既存の印刷物のみを変更します。紙申請を廃止せず、自動的にオンラインへ誘導するものでもありません。",
+      items: [["送付用封筒", "重要性と期限徒過の実際の不利益を簡潔に示し、誇張や威圧は避ける。", "顕著性 · 適時性"], ["更新申告書", "氏名欄と変更有無欄の近くに案内を置き、適切な説明書へ注意を向ける。", "注意 · プライミング"], ["手続案内", "適格性と選好で情報を整理し、適切な場合はオンラインを先に示しつつ、郵送も同等に利用可能にする。", "簡単 · 表示上のデフォルト"]],
+      safety: "さらに返信用封筒に、オンライン申請完了後は郵送不要と明記し、重複申請を防ぎます。",
+    },
+    trial: {
+      label: "03 · 試験デザイン",
+      title: "通常の行政実務の中で行うフィールド実験。",
+      intro: "北河内地域の前年度減免申請者を、ナッジ資料または従来資料を受け取る群へ無作為に割り付けます。申請期間は同一です。",
+      control: "従来資料",
+      intervention: "ナッジ・パッケージ",
+      population: "400–1,000人",
+      randomize: "無作為割付 · 1:1",
+      notes: [["実用的", "模擬環境ではなく実際の郵送業務で介入します。"], ["客観的", "意向ではなく行政の受付ログで結果を測定します。"], ["ITT", "資料を見たかに関係なく、当初の割付群で分析します。"], ["透明性", "乱数シード、プログラム、入力リストのハッシュ、実行日時を保存します。"]],
+    },
+    outcomes: {
+      label: "04 · 評価項目",
+      title: "成功は、オンライン率だけでは測れない。",
+      primaryLabel: "主要評価項目",
+      primary: "全無作為化対象者における、期限内の有効なオンライン申請完了率。",
+      groups: [["サービス継続", "全体の期限内申請 · 遅延申請 · 未申請"], ["安全性", "重複申請 · 不備または返戻"], ["プロセス", "申請までの日数 · 問い合わせ · 介入忠実度"], ["公平性・経済性", "年齢、前年度経路、市町村別効果 · 追加オンライン申請1件当たり費用"]],
+      interpretation: "政策判断は統計的有意性だけでなく、効果量、不確実性、全体申請率、害、公平性、費用を統合します。",
+    },
+    principles: {
+      label: "05 · 倫理と包摂性",
+      title: "デジタルは選択肢であり、排除の条件ではない。",
+      body: "紙、電話、対面、制度上許容される入力支援を実質的な代替手段として維持します。虚偽の社会規範、偽りの希少性、過度な心理的圧力は使用しません。",
+      principles: [["選択の自由", "紙申請を明確に利用可能な状態で維持します。"], ["アクセシビリティ", "文字サイズ、コントラスト、平易な日本語、キーボード、読み上げ、支援ニーズを確認します。"], ["プライバシー", "分析データは仮名化し、直接識別子を研究データから除外します。"], ["事前登録", "倫理・行政承認とOSFまたはAEA RCT登録を、無作為化と郵送の前に完了します。"]],
+    },
+    timeline: {
+      label: "06 · 予定日程",
+      title: "デザイン検証から公開報告まで。",
+      items: [["2026年7–9月", "規則確認、倫理審査、認知インタビュー、資料確定、事前登録"], ["2026年10–11月", "対象者リスト、無作為化、印刷、封入検査"], ["2026年11月", "介入・対照資料を同時発送"], ["2026年12月–2027年1月", "申請、問い合わせ、システム問題、有害事象の監視"], ["2027年1–2月", "データ固定、統計・費用対効果分析、報告"]],
+      note: "現在の状態",
+      noteBody: "本稿は研究プロトコルです。無作為化、介入、個人単位行政データの分析は開始されておらず、結果も報告していません。",
+    },
+    citation: "Tang, Kaibo (2026). Nudge Interventions to Increase Online Filing for Annual Motor Vehicle Tax (Category-Based) Exemption Renewals.",
+    footer: "研究紹介 · プロトコル Version 1.0 · 2026年7月11日",
+  },
+  zh: {
+    back: "唐楷博",
+    home: "主页",
+    chapters: "章节",
+    theme: "切换明暗模式",
+    skip: "跳转到研究正文",
+    nav: ["问题", "干预", "试验", "指标", "原则", "时间表"],
+    kicker: "研究方案 · 行为经济学 · 数字政府",
+    status: "研究方案 — 暂无结果",
+    title: "改善信息设计，能否推动行政程序转向线上？",
+    standfirst: "这项在大阪府真实行政环境中开展的务实型随机对照试验，将检验对减免续办材料进行谨慎的小幅调整，能否降低程序摩擦，同时确保数字化不让任何人掉队。",
+    author: "唐楷博 · 大阪大学经济学部",
+    openPdf: "在 SSRN 查看或下载",
+    ssrn: "返回个人主页",
+    scroll: "浏览研究",
+    facts: [["实施地区", "大阪府北河内地区"], ["计划样本", "400–1,000名前一年度申请者"], ["分组", "干预组与对照组 1:1"], ["设计", "务实型随机对照试验"]],
+    problem: {
+      label: "01 · 研究问题",
+      title: "线上申报已经存在，为何多数符合条件者仍选择邮寄？",
+      body: "申报信息未发生变化的申请者可以在线续办汽车税减免。然而，2025财年的初步行政汇总显示，该群体中仍有73.7%通过邮寄申报。本研究不把这一差距归因于动机不足，而将其视为有限注意、信息设计、现状偏好与行政负担共同造成的问题。",
+      caveat: "73.7%",
+      caveatLabel: "初步行政汇总中，被记录为“无变化”的申请者使用邮寄申报的比例；正式分析前将重新确认分母和缺失数据规则。",
+      bottleneckTitle: "摩擦累积的三个时刻",
+      bottlenecks: [["01", "开封", "收件人可能没有意识到邮件的重要性或紧迫性。"], ["02", "注意", "线上选项或相应说明可能始终没有进入注意范围。"], ["03", "转换", "熟悉的纸质申报可能比注册和在线填写更令人安心。"]],
+    },
+    intervention: {
+      label: "02 · 干预",
+      title: "一套助推方案，作用于三个决策节点。",
+      intro: "干预只调整现有纸质材料，不取消纸质渠道，也不会自动将任何人转为线上申报。",
+      items: [["外层信封", "突出材料的重要性及错过截止日期的真实后果，同时避免夸大与恐吓。", "显著性 · 及时性"], ["续办申报表", "在姓名和信息变更栏附近设置清晰提示，引导申请者查看正确说明。", "注意 · 启动效应"], ["程序说明", "按资格与偏好重组信息；适用时优先呈现线上方式，同时保持纸质渠道同等可用。", "简化 · 呈现默认"]],
+      safety: "回复信封还会增加安全提示：完成线上申报后无需邮寄，从而减少重复申报。",
+    },
+    trial: {
+      label: "03 · 试验设计",
+      title: "嵌入日常行政流程的现场试验。",
+      intro: "北河内地区前一年度减免申请者将被随机分配，在同一申报期收到重新设计的材料或现行材料。",
+      control: "现行材料",
+      intervention: "助推材料",
+      population: "400–1,000名申请者",
+      randomize: "随机分配 · 1:1",
+      notes: [["务实", "干预通过真实邮寄流程实施，而非模拟环境。"], ["客观", "结果来自行政受理记录，而不是自报意愿。"], ["意向性分析", "无论是否阅读材料，均按最初随机分组进行分析。"], ["透明", "保留随机种子、程序、输入清单哈希及执行时间。"]],
+    },
+    outcomes: {
+      label: "04 · 衡量什么",
+      title: "成功不只是让一个比例上升。",
+      primaryLabel: "主要结局",
+      primary: "所有随机分组对象中，在期限内完成有效线上申报的比例。",
+      groups: [["服务连续性", "总体按时申报 · 延迟申报 · 未申报"], ["安全", "重复申报 · 材料不完整或被退回"], ["过程", "申报用时 · 咨询量 · 干预执行一致性"], ["公平与经济性", "按年龄、上一年度渠道和市町村评估效果 · 每增加一份线上申报的成本"]],
+      interpretation: "政策判断将综合效果大小、不确定性、总体申报、潜在伤害、公平性与成本，而不会只看统计显著性。",
+    },
+    principles: {
+      label: "05 · 伦理与包容",
+      title: "数字化应当是一种选择，而不是新的排除条件。",
+      body: "研究明确保留纸质、电话、现场办理以及制度允许的协助填写，作为实质性替代渠道；同时禁止虚构社会规范、制造虚假稀缺或施加过度心理压力。",
+      principles: [["选择自由", "所有人都能清楚地继续使用纸质渠道。"], ["无障碍", "检查字号、对比度、简明日语、键盘操作、屏幕阅读器与协助需求。"], ["隐私", "分析数据采用假名化处理，直接身份信息不进入研究数据集。"], ["预注册", "随机分组和邮寄之前，完成伦理与行政审批，以及OSF或AEA RCT注册。"]],
+    },
+    timeline: {
+      label: "06 · 计划时间表",
+      title: "从设计审查到公开报告。",
+      items: [["2026年7–9月", "核对制度、伦理审查、认知访谈、定稿材料、预注册"], ["2026年10–11月", "确定名单、随机分组、印刷与装袋检查"], ["2026年11月", "同时寄出干预组和对照组材料"], ["2026年12月–2027年1月", "接收申请并监测咨询、系统问题与不良事件"], ["2027年1–2月", "锁定数据、统计与成本效果分析、撰写报告"]],
+      note: "当前状态",
+      noteBody: "本文是一份研究方案。随机分组、邮寄干预和个人层级行政数据分析均尚未开始，当前不报告任何结果。",
+    },
+    citation: "Tang, Kaibo (2026). Nudge Interventions to Increase Online Filing for Annual Motor Vehicle Tax (Category-Based) Exemption Renewals.",
+    footer: "研究介绍 · 研究方案 Version 1.0 · 2026年7月11日",
+  },
+} as const;
+
+const anchors = ["question", "intervention", "trial", "outcomes", "principles", "timeline"];
+const ssrn = "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7097298";
+
+export default function NudgeStudyPage() {
+  const [lang, setLang] = useState<Lang>("en");
+  const [dark, setDark] = useState(false);
+  const t = text[lang];
+
+  useEffect(() => {
+    const savedLang = window.localStorage.getItem("kaibo-lang") as Lang | null;
+    if (savedLang && savedLang in text) setLang(savedLang);
+    const savedTheme = window.localStorage.getItem("kaibo-theme");
+    setDark(savedTheme ? savedTheme === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = lang === "zh" ? "zh-CN" : lang;
+    window.localStorage.setItem("kaibo-lang", lang);
+  }, [lang]);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = dark ? "dark" : "light";
+    window.localStorage.setItem("kaibo-theme", dark ? "dark" : "light");
+  }, [dark]);
+
+  return (
+    <div className="paper-page">
+      <a className="skip-link" href="#paper-content">{t.skip}</a>
+      <header className="paper-header">
+        <a className="paper-brand" href="/"><span>KT</span><b>{t.back}</b></a>
+        <nav aria-label={t.chapters}>
+          {anchors.map((anchor, index) => <a href={`#${anchor}`} key={anchor}>{t.nav[index]}</a>)}
+        </nav>
+        <div className="paper-actions">
+          <div className="language-switcher" role="group" aria-label="Language">
+            {(["en", "ja", "zh"] as Lang[]).map((item) => (
+              <button className={lang === item ? "active" : ""} key={item} onClick={() => setLang(item)} type="button" aria-pressed={lang === item}>
+                {item === "en" ? "EN" : item === "ja" ? "日本語" : "中文"}
+              </button>
+            ))}
+          </div>
+          <button className="theme-toggle" onClick={() => setDark((value) => !value)} type="button" aria-label={t.theme}>{dark ? "☼" : "◐"}</button>
+        </div>
+      </header>
+
+      <main id="paper-content">
+        <section className="paper-hero">
+          <div className="paper-hero-number" aria-hidden="true">7097298</div>
+          <div className="paper-hero-copy">
+            <div className="paper-kicker"><span>{t.kicker}</span><span>{t.status}</span></div>
+            <h1>{t.title}</h1>
+            <p className="paper-standfirst">{t.standfirst}</p>
+            <p className="paper-author">{t.author}</p>
+            <div className="paper-hero-actions">
+              <a className="button button-primary" href={ssrn} target="_blank" rel="noreferrer">{t.openPdf}<span>↗</span></a>
+              <a className="text-link" href="/">{t.ssrn}<span>←</span></a>
+            </div>
+          </div>
+          <aside className="paper-fact-grid">
+            {t.facts.map(([label, value]) => <div key={label}><span>{label}</span><strong>{value}</strong></div>)}
+          </aside>
+          <a className="paper-scroll" href="#question">{t.scroll}<span>↓</span></a>
+        </section>
+
+        <section className="paper-chapter problem-chapter" id="question">
+          <div className="chapter-heading"><p>{t.problem.label}</p><h2>{t.problem.title}</h2></div>
+          <div className="problem-layout">
+            <p className="chapter-lead">{t.problem.body}</p>
+            <aside className="evidence-stat"><strong>{t.problem.caveat}</strong><p>{t.problem.caveatLabel}</p></aside>
+          </div>
+          <h3 className="subchapter-title">{t.problem.bottleneckTitle}</h3>
+          <div className="bottleneck-grid">
+            {t.problem.bottlenecks.map(([n, title, body]) => <article key={n}><span>{n}</span><h4>{title}</h4><p>{body}</p></article>)}
+          </div>
+        </section>
+
+        <section className="paper-chapter intervention-chapter" id="intervention">
+          <div className="chapter-heading"><p>{t.intervention.label}</p><h2>{t.intervention.title}</h2><div className="chapter-intro">{t.intervention.intro}</div></div>
+          <div className="touchpoint-flow">
+            {t.intervention.items.map(([title, body, mechanism], index) => (
+              <article key={title}><span className="touchpoint-number">0{index + 1}</span><p className="touchpoint-mechanism">{mechanism}</p><h3>{title}</h3><p>{body}</p></article>
+            ))}
+          </div>
+          <div className="safety-note"><span>＋</span><p>{t.intervention.safety}</p></div>
+        </section>
+
+        <section className="paper-chapter trial-chapter" id="trial">
+          <div className="chapter-heading"><p>{t.trial.label}</p><h2>{t.trial.title}</h2><div className="chapter-intro">{t.trial.intro}</div></div>
+          <div className="trial-diagram" aria-label={t.trial.title}>
+            <div className="trial-population"><span>{t.trial.population}</span></div>
+            <div className="trial-arrow"><span>{t.trial.randomize}</span></div>
+            <div className="trial-arms"><div><b>A</b><span>{t.trial.control}</span></div><div><b>B</b><span>{t.trial.intervention}</span></div></div>
+          </div>
+          <div className="method-notes">{t.trial.notes.map(([title, body]) => <article key={title}><h3>{title}</h3><p>{body}</p></article>)}</div>
+        </section>
+
+        <section className="paper-chapter outcomes-chapter" id="outcomes">
+          <div className="chapter-heading"><p>{t.outcomes.label}</p><h2>{t.outcomes.title}</h2></div>
+          <div className="primary-outcome"><span>{t.outcomes.primaryLabel}</span><p>{t.outcomes.primary}</p></div>
+          <div className="outcome-grid">{t.outcomes.groups.map(([title, body], index) => <article key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{body}</p></article>)}</div>
+          <blockquote>{t.outcomes.interpretation}</blockquote>
+        </section>
+
+        <section className="paper-chapter principles-chapter" id="principles">
+          <div className="chapter-heading"><p>{t.principles.label}</p><h2>{t.principles.title}</h2><div className="chapter-intro">{t.principles.body}</div></div>
+          <div className="principle-list">{t.principles.principles.map(([title, body], index) => <article key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{body}</p></article>)}</div>
+        </section>
+
+        <section className="paper-chapter timeline-chapter" id="timeline">
+          <div className="chapter-heading"><p>{t.timeline.label}</p><h2>{t.timeline.title}</h2></div>
+          <div className="research-timeline">{t.timeline.items.map(([period, activity], index) => <article key={period}><span>0{index + 1}</span><time>{period}</time><p>{activity}</p></article>)}</div>
+          <div className="status-card"><span>{t.timeline.note}</span><p>{t.timeline.noteBody}</p></div>
+        </section>
+
+        <section className="paper-citation">
+          <p>{t.citation}</p>
+          <div><a href={ssrn} target="_blank" rel="noreferrer">SSRN ↗</a><a href="/">{t.home} →</a></div>
+        </section>
+      </main>
+      <footer className="paper-footer"><span>{t.footer}</span><a href="#paper-content">Top ↑</a></footer>
+    </div>
+  );
+}

@@ -67,8 +67,11 @@ const copy = {
       title: "Selected writing",
       intro: "Research protocols and working papers in behavioral economics, public administration, and labor economics.",
       author: "Kaibo Tang",
+      latest: "Working paper · SSRN · 2026",
       preprint: "Preprint · SSRN · 19 pages · Posted 13 July 2026",
       working: "Working paper · SSRN",
+      auditPaper: "Beyond Directional Accuracy: Auditing Archived GPT-4 Forecasts for Behavioral Intervention Choice",
+      auditPaperShort: "An incremental-information audit showing why correct directions need not imply calibrated forecasts or better intervention choices—and why simple baselines, named comparators, and winner uncertainty matter.",
       paperOne: "Nudge Interventions to Increase Online Filing for Annual Motor Vehicle Tax (Category-Based) Exemption Renewals — Protocol for a Pragmatic Randomized Controlled Trial in the Kitakawachi Area of Osaka Prefecture",
       paperOneShort: "This protocol evaluates whether a nudge package can increase timely completed online filings, while explicitly measuring access, equity, administrative burden, and possible harms of digitalization.",
       paperTwo: "Information Frictions, Ethnic Networks, and Part-Time Wage Gaps among Chinese International Students in Japan",
@@ -78,6 +81,7 @@ const copy = {
       view: "View on SSRN",
       pdf: "Open PDF",
       jel: "JEL D91 · C93 · H71 · H83",
+      auditJel: "JEL C44 · C52 · C53 · D91",
     },
     contact: {
       label: "Contact",
@@ -85,7 +89,7 @@ const copy = {
       body: "For research correspondence, potential collaboration, or questions about my work, please feel free to get in touch.",
       email: "Write an email",
       orcid: "View ORCID",
-      ssrn: "View SSRN paper",
+      ssrn: "View SSRN profile",
     },
     footer: "Kaibo Tang · 唐楷博",
     theme: "Toggle color theme",
@@ -153,8 +157,11 @@ const copy = {
       title: "研究成果",
       intro: "行動経済学、公共行政、労働経済学に関する研究プロトコルとワーキングペーパーです。",
       author: "Kaibo Tang（唐 楷博）",
+      latest: "ワーキングペーパー · SSRN · 2026年",
       preprint: "プレプリント · SSRN · 19頁 · 2026年7月13日公開",
       working: "ワーキングペーパー · SSRN",
+      auditPaper: "方向の正しさを超えて――行動介入選択のための保存済みGPT-4予測の監査",
+      auditPaperShort: "方向を正しく当てることが、数値的に較正された予測やより良い介入選択を意味しない理由を検証し、単純な基準、比較対象の明示、勝者の不確実性の重要性を示します。",
       paperOne: "自動車税（種別割）減免更新のオンライン申請を促進するナッジ介入――大阪府北河内地域における実用的ランダム化比較試験のプロトコル",
       paperOneShort: "オンライン申請の期限内完了率を高められるかを検証するとともに、デジタル化に伴うアクセス、公平性、行政負担、潜在的な不利益も評価する研究プロトコルです。",
       paperTwo: "日本の中国人留学生における情報摩擦、エスニック・ネットワークとアルバイト賃金格差",
@@ -164,6 +171,7 @@ const copy = {
       view: "SSRNで見る",
       pdf: "PDFを開く",
       jel: "JEL D91 · C93 · H71 · H83",
+      auditJel: "JEL C44 · C52 · C53 · D91",
     },
     contact: {
       label: "連絡先",
@@ -171,7 +179,7 @@ const copy = {
       body: "研究に関するご連絡、共同研究のご相談、研究内容へのご質問がありましたら、お気軽にお問い合わせください。",
       email: "メールを送る",
       orcid: "ORCIDを見る",
-      ssrn: "SSRN論文を見る",
+      ssrn: "SSRNプロフィールを見る",
     },
     footer: "Kaibo Tang · 唐楷博",
     theme: "配色を切り替える",
@@ -239,8 +247,11 @@ const copy = {
       title: "研究文章",
       intro: "关于行为经济学、公共行政和劳动经济学的研究方案与工作论文。",
       author: "唐楷博（Kaibo Tang）",
+      latest: "工作论文 · SSRN · 2026年",
       preprint: "预印本 · SSRN · 19页 · 2026年7月13日发布",
       working: "工作论文 · SSRN",
+      auditPaper: "超越方向准确性：面向行为干预选择的存档GPT-4预测审计",
+      auditPaperShort: "通过增量信息审计说明：方向判断正确并不等于数值预测校准，也不必然带来更优的干预选择；评估还需要简单基准、清晰的比较对象与对“赢家”不确定性的处理。",
       paperOne: "提高汽车税（按类别）减免续办在线申报率的助推干预——大阪府北河内地区务实型随机对照试验方案",
       paperOneShort: "该研究方案评估一组助推措施能否提高按时完成在线申报的比例，同时考察数字化带来的可及性、公平性、行政负担与潜在不利影响。",
       paperTwo: "在日中国留学生的信息摩擦、族群网络与兼职工资差距",
@@ -250,6 +261,7 @@ const copy = {
       view: "在 SSRN 查看",
       pdf: "打开 PDF",
       jel: "JEL D91 · C93 · H71 · H83",
+      auditJel: "JEL C44 · C52 · C53 · D91",
     },
     contact: {
       label: "联系方式",
@@ -257,7 +269,7 @@ const copy = {
       body: "如需研究交流、探讨合作，或对我的工作有任何问题，欢迎与我联系。",
       email: "发送邮件",
       orcid: "查看 ORCID",
-      ssrn: "查看 SSRN 文章",
+      ssrn: "查看 SSRN 主页",
     },
     footer: "Kaibo Tang · 唐楷博",
     theme: "切换明暗模式",
@@ -267,6 +279,9 @@ const copy = {
 
 const links = {
   paperOverview: "/research/nudge-study",
+  auditOverview: "/research/gpt4-forecast-audit",
+  auditSsrn: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7127120",
+  ssrnProfile: "https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=11293568",
   orcid: "https://orcid.org/0009-0004-2637-8025",
   independentResearch: "https://www.osaka-u.ac.jp/ja/education/ug_jishuken",
   abef: "https://www.abef.jp/",
@@ -365,7 +380,7 @@ export default function Home() {
               <a className="button button-primary" href="#research">
                 {t.hero.explore}<span aria-hidden="true">↘</span>
               </a>
-              <a className="text-link" href={links.paperOverview}>
+              <a className="text-link" href={links.auditOverview}>
                 {t.hero.selected}<span aria-hidden="true">↗</span>
               </a>
             </div>
@@ -533,6 +548,23 @@ export default function Home() {
                 <span className="publication-year">2026</span>
               </div>
               <div className="publication-body">
+                <p className="publication-type">{t.publications.latest}</p>
+                <h3>{t.publications.auditPaper}</h3>
+                {lang !== "en" && <p className="original-title">Beyond Directional Accuracy: Auditing Archived GPT-4 Forecasts for Behavioral Intervention Choice</p>}
+                <p className="publication-author">{t.publications.author} · {t.publications.auditJel}</p>
+                <p className="publication-teaser">{t.publications.auditPaperShort}</p>
+                <div className="publication-actions">
+                  <a href={links.auditOverview}>{t.publications.overview}<span aria-hidden="true">→</span></a>
+                </div>
+              </div>
+            </article>
+
+            <article className="publication">
+              <div className="publication-side">
+                <span className="publication-number">02</span>
+                <span className="publication-year">2026</span>
+              </div>
+              <div className="publication-body">
                 <p className="publication-type">{t.publications.preprint}</p>
                 <h3>{t.publications.paperOne}</h3>
                 {lang !== "en" && <p className="original-title">Nudge Interventions to Increase Online Filing for Annual Motor Vehicle Tax (Category-Based) Exemption Renewals — Protocol for a Pragmatic Randomized Controlled Trial in the Kitakawachi Area of Osaka Prefecture</p>}
@@ -546,7 +578,7 @@ export default function Home() {
 
             <article className="publication">
               <div className="publication-side">
-                <span className="publication-number">02</span>
+                <span className="publication-number">03</span>
                 <span className="publication-year">2026</span>
               </div>
               <div className="publication-body">
@@ -582,7 +614,7 @@ export default function Home() {
           <div className="contact-links">
             <a href={links.email}>{t.contact.email}<span aria-hidden="true">↗</span></a>
             <a href={links.orcid} target="_blank" rel="noreferrer">{t.contact.orcid}<span aria-hidden="true">↗</span></a>
-            <a href={links.paperOverview}>{t.contact.ssrn}<span aria-hidden="true">→</span></a>
+            <a href={links.ssrnProfile} target="_blank" rel="noreferrer">{t.contact.ssrn}<span aria-hidden="true">↗</span></a>
           </div>
         </section>
       </main>

@@ -46,6 +46,10 @@ const copy = {
       membershipTitle: "Association of Behavioral Economics and Finance",
       membershipBody: "Student Member",
       membershipMeta: "Since July 2026",
+      teachingLabel: "Part-time teaching",
+      teachingTitle: "Chinichi Juku Osaka",
+      teachingBody: "EJU Japanese · Japan and the World · Mathematics Course 1",
+      teachingMeta: "Instructor · Osaka",
       learnMore: "Official information",
     },
     research: {
@@ -136,6 +140,10 @@ const copy = {
       membershipTitle: "行動経済学会",
       membershipBody: "学生会員",
       membershipMeta: "2026年7月より",
+      teachingLabel: "アルバイト・教育経験",
+      teachingTitle: "知日塾 大阪校",
+      teachingBody: "EJU日本語 · 総合科目 · 文科数学",
+      teachingMeta: "講師 · 大阪",
       learnMore: "公式情報",
     },
     research: {
@@ -226,6 +234,10 @@ const copy = {
       membershipTitle: "日本行为经济学会",
       membershipBody: "学生会员",
       membershipMeta: "自2026年7月起",
+      teachingLabel: "兼职教学",
+      teachingTitle: "知日塾大阪校",
+      teachingBody: "EJU日语 · 综合科目 · 文科数学",
+      teachingMeta: "讲师 · 大阪",
       learnMore: "官方信息",
     },
     research: {
@@ -287,6 +299,7 @@ const links = {
   abef: "https://www.abef.jp/",
   osakaEconomics: "https://www.econ.osaka-u.ac.jp/",
   ohtakeSeminar: "https://sites.google.com/view/ohtakeseminar/",
+  teaching: "/teaching/chinichi-osaka",
   paperTwo: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7087178",
   email: "mailto:u300863g@ecs.osaka-u.ac.jp",
 };
@@ -470,6 +483,12 @@ export default function Home() {
             </div>
 
             <div className="academic-cards">
+              <a className="academic-card teaching-card" href={links.teaching}>
+                <div className="academic-card-top"><span>{t.academic.teachingLabel}</span><span>↗</span></div>
+                <h3>{t.academic.teachingTitle}</h3>
+                <p>{t.academic.teachingBody}</p>
+                <div className="academic-card-meta">{t.academic.teachingMeta}</div>
+              </a>
               <a className="academic-card support-card" href={links.independentResearch} target="_blank" rel="noreferrer">
                 <div className="academic-card-top"><span>{t.academic.supportLabel}</span><span>↗</span></div>
                 <h3>{t.academic.supportTitle}</h3>

@@ -879,6 +879,20 @@ button {
   border-color: rgba(241, 238, 231, 0.18);
 }
 
+.teaching-card {
+  background: color-mix(in srgb, var(--accent) 14%, var(--card));
+}
+
+.teaching-card::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: var(--accent);
+  content: "";
+}
+
 .research-section {
   background: color-mix(in srgb, var(--paper-deep) 58%, transparent);
 }
@@ -2375,6 +2389,94 @@ button {
   color: var(--accent);
 }
 
+/* Chinichi Juku Osaka teaching route */
+.teaching-page .paper-hero h1 {
+  max-width: 1080px;
+  font-size: clamp(52px, 7.2vw, 110px);
+}
+
+.teaching-page .paper-hero-number {
+  right: -0.03em;
+  font-size: clamp(150px, 27vw, 410px);
+  letter-spacing: -0.09em;
+}
+
+.teaching-page .paper-hero::after {
+  top: -12%;
+  right: -4%;
+  width: min(50vw, 760px);
+  height: min(50vw, 760px);
+  border-radius: 3%;
+  transform: rotate(13deg);
+}
+
+.teaching-domains {
+  margin-top: clamp(80px, 10vw, 145px);
+}
+
+.teaching-course-flow h3 {
+  max-width: 420px;
+}
+
+.teaching-campus {
+  background: var(--paper);
+}
+
+.teaching-campus-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: clamp(28px, 5vw, 78px);
+  align-items: start;
+}
+
+.teaching-campus-grid .status-card {
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin: 0;
+}
+
+.teaching-address {
+  min-height: 410px;
+  padding: clamp(32px, 5vw, 72px);
+  color: #f1eee7;
+  background: #0a2230;
+}
+
+.teaching-address > span {
+  color: #d3a465;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.teaching-address > p {
+  max-width: 820px;
+  margin: clamp(70px, 8vw, 120px) 0 55px;
+  font-family: var(--serif);
+  font-size: clamp(27px, 3.2vw, 48px);
+  line-height: 1.25;
+}
+
+.teaching-address > div {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.teaching-address a {
+  padding-bottom: 7px;
+  border-bottom: 1px solid rgba(241, 238, 231, 0.35);
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.teaching-endcap {
+  background: #102b38;
+}
+
 @media (max-width: 1050px) {
   .paper-header { grid-template-columns: 1fr auto; }
   .paper-header nav { display: none; }
@@ -2432,4 +2534,7 @@ button {
   .regret-panel { padding: 28px 20px; }
   .regret-panel article > div { align-items: flex-end; }
   .regret-panel article span { max-width: 72%; }
+  .teaching-campus-grid { grid-template-columns: 1fr; }
+  .teaching-address { min-height: 360px; padding: 38px 25px; }
+  .teaching-address > p { margin: 65px 0 45px; }
 }

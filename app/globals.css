@@ -125,8 +125,10 @@ button {
   width: 38px;
   height: 38px;
   place-items: center;
-  border: 1px solid var(--line-strong);
+  border: 0;
   border-radius: 50%;
+  color: transparent;
+  background: url("/favicon-512.png") center / contain no-repeat;
   font-family: var(--serif);
   font-size: 12px;
   letter-spacing: 0.06em;
@@ -1537,8 +1539,10 @@ button {
   width: 34px;
   height: 34px;
   place-items: center;
-  border: 1px solid var(--line-strong);
+  border: 0;
   border-radius: 50%;
+  color: transparent;
+  background: url("/favicon-512.png") center / contain no-repeat;
   font-family: var(--serif);
   font-size: 10px;
 }

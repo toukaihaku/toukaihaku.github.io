@@ -55,15 +55,19 @@ const copy = {
     research: {
       label: "Research experience",
       title: "Current lines of inquiry",
-      intro: "Two current projects examine how behavioral insights and forecasting tools can improve public decisions—from administrative design to intervention selection.",
+      intro: "Three current projects examine how information environments, behavioral insights, and forecasting tools shape public and labor-market decisions.",
       projectLabel: "Working paper",
       protocolLabel: "Study protocol",
+      designLabel: "Research design",
       projectOneTitle: "Digital administration & behavioral public policy",
       projectOneBody: "Designing a pragmatic randomized controlled trial in Osaka Prefecture to test whether redesigned envelopes, renewal forms, and procedural instructions can increase timely online filing for motor vehicle tax exemption renewals.",
       projectTwoTitle: "Behavioral forecasting & intervention choice",
       projectTwoBody: "Auditing archived GPT-4 forecasts to test whether directional accuracy adds useful quantitative information and improves choices among behavioral interventions.",
+      projectThreeTitle: "Information frictions & student labor markets",
+      projectThreeBody: "A pre-specified study of how Japanese/formal and Chinese/co-ethnic job-search channels may shape the part-time opportunities and wages visible to Chinese international students in Japan.",
       supportOne: "Study protocol · The University of Osaka",
       supportTwo: "Working paper · SSRN 7127120",
+      supportThree: "Research design · SSRN 7087178",
       period: "2026 — present",
     },
     publications: {
@@ -149,15 +153,19 @@ const copy = {
     research: {
       label: "研究経験",
       title: "現在の研究テーマ",
-      intro: "行政デザインから介入選択まで、行動科学の知見と予測手法が公共の意思決定をどう改善できるかを二つの研究で検討しています。",
+      intro: "情報環境、行動科学の知見、予測手法が公共部門と労働市場の意思決定にどう関わるかを、三つの研究で検討しています。",
       projectLabel: "ワーキングペーパー",
       protocolLabel: "研究プロトコル",
+      designLabel: "研究デザイン",
       projectOneTitle: "デジタル行政と行動公共政策",
       projectOneBody: "大阪府における自動車税（種別割）減免更新を対象に、封筒、更新申請書、手続案内の改善が期限内のオンライン申請を促進するかを検証する、実用的ランダム化比較試験を設計しています。",
       projectTwoTitle: "行動予測と介入選択",
       projectTwoBody: "保存済みGPT-4予測を監査し、方向の正しさが有用な数量情報を加え、行動介入の選択を改善するかを検証しています。",
+      projectThreeTitle: "情報摩擦と留学生の労働市場",
+      projectThreeBody: "日本の中国人留学生を対象に、日本語・公的経路と中国語・同民族ネットワークを通じた求職が、目に入るアルバイト機会と賃金にどう関わるかを事前に定めた設計で検討します。",
       supportOne: "研究プロトコル · 大阪大学",
       supportTwo: "ワーキングペーパー · SSRN 7127120",
+      supportThree: "研究デザイン · SSRN 7087178",
       period: "2026 — 現在",
     },
     publications: {
@@ -243,15 +251,19 @@ const copy = {
     research: {
       label: "研究经历",
       title: "当前研究方向",
-      intro: "通过两项研究考察行为科学洞见与预测工具如何改善公共决策，涵盖行政设计与干预选择。",
+      intro: "通过三项研究考察信息环境、行为科学洞见与预测工具如何影响公共部门和劳动力市场中的决策。",
       projectLabel: "工作论文",
       protocolLabel: "研究方案",
+      designLabel: "研究设计",
       projectOneTitle: "数字行政与行为公共政策",
       projectOneBody: "围绕大阪府汽车税（按类别）减免续办程序，设计务实型随机对照试验，检验重新设计信封、续办表格和程序说明能否提高按时完成在线申报的比例。",
       projectTwoTitle: "行为预测与干预选择",
       projectTwoBody: "审计存档GPT-4预测，检验方向准确性是否提供有用的增量数量信息，并改善行为干预的选择。",
+      projectThreeTitle: "信息摩擦与留学生劳动力市场",
+      projectThreeBody: "以预先设定的研究设计，考察日本的中国留学生通过日语/正式渠道或中文/同族网络求职，是否会影响其可见的兼职机会与工资。",
       supportOne: "研究方案 · 大阪大学",
       supportTwo: "工作论文 · SSRN 7127120",
+      supportThree: "研究设计 · SSRN 7087178",
       period: "2026 — 至今",
     },
     publications: {
@@ -300,7 +312,8 @@ const links = {
   osakaEconomics: "https://www.econ.osaka-u.ac.jp/",
   ohtakeSeminar: "https://sites.google.com/view/ohtakeseminar/",
   teaching: "/teaching/chinichi-osaka",
-  paperTwo: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7087178",
+  informationOverview: "/research/information-frictions",
+  informationSsrn: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7087178",
   email: "mailto:u300863g@ecs.osaka-u.ac.jp",
 };
 
@@ -547,6 +560,22 @@ export default function Home() {
                 <span className="card-arrow" aria-hidden="true">↗</span>
               </div>
             </a>
+
+            <a className="research-card research-card-wide research-card-network" href={links.informationOverview} aria-label={t.publications.overview}>
+              <div className="card-number">03</div>
+              <div className="card-main">
+                <div className="card-meta">
+                  <span>{t.research.designLabel}</span>
+                  <span>{t.research.period}</span>
+                </div>
+                <h3>{t.research.projectThreeTitle}</h3>
+                <p>{t.research.projectThreeBody}</p>
+              </div>
+              <div className="card-foot">
+                <span>{t.research.supportThree}</span>
+                <span className="card-arrow" aria-hidden="true">↗</span>
+              </div>
+            </a>
           </div>
         </section>
 
@@ -610,7 +639,7 @@ export default function Home() {
                   <p>{t.publications.paperTwoShort}</p>
                 </details>
                 <div className="publication-actions">
-                  <a href={links.paperTwo} target="_blank" rel="noreferrer">{t.publications.view}<span aria-hidden="true">↗</span></a>
+                  <a href={links.informationOverview}>{t.publications.overview}<span aria-hidden="true">→</span></a>
                 </div>
               </div>
             </article>

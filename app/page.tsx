@@ -83,8 +83,6 @@ const copy = {
       paperOne: "Nudge Interventions to Increase Online Filing for Annual Motor Vehicle Tax (Category-Based) Exemption Renewals — Protocol for a Pragmatic Randomized Controlled Trial in the Kitakawachi Area of Osaka Prefecture",
       paperOneShort: "This protocol evaluates whether a nudge package can increase timely completed online filings, while explicitly measuring access, equity, administrative burden, and possible harms of digitalization.",
       paperTwo: "Information Frictions, Ethnic Networks, and Part-Time Wage Gaps among Chinese International Students in Japan",
-      paperTwoShort: "A study of job-information channels, social networks, and unequal part-time labor-market outcomes among Chinese international students in Japan.",
-      abstract: "Abstract",
       overview: "Research overview",
       view: "View on SSRN",
       pdf: "Open PDF",
@@ -181,8 +179,6 @@ const copy = {
       paperOne: "自動車税（種別割）減免更新のオンライン申請を促進するナッジ介入――大阪府北河内地域における実用的ランダム化比較試験のプロトコル",
       paperOneShort: "オンライン申請の期限内完了率を高められるかを検証するとともに、デジタル化に伴うアクセス、公平性、行政負担、潜在的な不利益も評価する研究プロトコルです。",
       paperTwo: "日本の中国人留学生における情報摩擦、エスニック・ネットワークとアルバイト賃金格差",
-      paperTwoShort: "日本の中国人留学生を対象に、求人情報の経路、社会的ネットワーク、アルバイト労働市場における格差を分析する研究です。",
-      abstract: "概要",
       overview: "研究紹介",
       view: "SSRNで見る",
       pdf: "PDFを開く",
@@ -279,8 +275,6 @@ const copy = {
       paperOne: "提高汽车税（按类别）减免续办在线申报率的助推干预——大阪府北河内地区务实型随机对照试验方案",
       paperOneShort: "该研究方案评估一组助推措施能否提高按时完成在线申报的比例，同时考察数字化带来的可及性、公平性、行政负担与潜在不利影响。",
       paperTwo: "在日中国留学生的信息摩擦、族群网络与兼职工资差距",
-      paperTwoShort: "研究求职信息渠道、社会网络与在日中国留学生兼职劳动力市场结果之间的关系。",
-      abstract: "摘要",
       overview: "研究介绍",
       view: "在 SSRN 查看",
       pdf: "打开 PDF",
@@ -634,10 +628,6 @@ export default function Home() {
                 <h3>{t.publications.paperTwo}</h3>
                 {lang !== "en" && <p className="original-title">Information Frictions, Ethnic Networks, and Part-Time Wage Gaps among Chinese International Students in Japan</p>}
                 <p className="publication-author">{t.publications.author}</p>
-                <details>
-                  <summary>{t.publications.abstract}<span aria-hidden="true">＋</span></summary>
-                  <p>{t.publications.paperTwoShort}</p>
-                </details>
                 <div className="publication-actions">
                   <a href={links.informationOverview}>{t.publications.overview}<span aria-hidden="true">→</span></a>
                 </div>

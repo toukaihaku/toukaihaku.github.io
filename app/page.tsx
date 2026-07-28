@@ -412,7 +412,7 @@ export default function Home() {
           <aside className="portrait-panel reveal delay-three" aria-label={t.hero.portrait}>
             <div className="portrait-frame">
               <div className="portrait-photo">
-                <img src="/kaibo-tang-portrait.jpg" alt={t.hero.photoAlt} />
+                <img src="/kaibo-tang-city-night.jpg" alt={t.hero.photoAlt} />
               </div>
               <p>{t.hero.portrait}</p>
             </div>

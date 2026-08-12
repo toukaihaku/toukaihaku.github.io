@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { VisitorTracker } from "./visitor-counter";
 
 export const metadata: Metadata = {
   title: "Kaibo Tang | 唐楷博",
@@ -16,7 +17,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>{children}</body>
+      <body>
+        <VisitorTracker />
+        {children}
+      </body>
     </html>
   );
 }

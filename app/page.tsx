@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import VisitorCounter from "./visitor-counter";
 
 type Lang = "en" | "ja" | "zh";
 
@@ -99,6 +100,7 @@ const copy = {
       ssrn: "View SSRN profile",
     },
     footer: "Kaibo Tang · 唐楷博",
+    visitorCounter: "Approx. visitors",
     theme: "Toggle color theme",
     skip: "Skip to content",
   },
@@ -196,6 +198,7 @@ const copy = {
       ssrn: "SSRNプロフィールを見る",
     },
     footer: "Kaibo Tang · 唐楷博",
+    visitorCounter: "概算訪問者数",
     theme: "配色を切り替える",
     skip: "本文へ移動",
   },
@@ -293,6 +296,7 @@ const copy = {
       ssrn: "查看 SSRN 主页",
     },
     footer: "Kaibo Tang · 唐楷博",
+    visitorCounter: "累计访客（约）",
     theme: "切换明暗模式",
     skip: "跳转到正文",
   },
@@ -664,6 +668,7 @@ export default function Home() {
       <footer className="site-footer">
         <p>{t.footer}</p>
         <p>© 2026 · The University of Osaka</p>
+        <VisitorCounter label={t.visitorCounter} />
         <a href="#top">Back to top ↑</a>
       </footer>
     </>

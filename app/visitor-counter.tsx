@@ -2,31 +2,17 @@
 
 import { useEffect, useState } from "react";
 
-const COUNTER_URL = "https://counterapi.com/api/toukaihaku.github.io/view/personal-site";
-const COUNTED_KEY = "kaibo-site-visitor-counted-v1";
-const VISITOR_ID_KEY = "kaibo-site-visitor-id-v1";
+const COUNTER_ROOT = "https://page-views-api.ratneshc.com/api/v1";
+const COUNTER_QUERY = "site=toukaihaku.github.io&path=%2Fsite-visit";
+const TRACK_URL = `${COUNTER_ROOT}/track?${COUNTER_QUERY}`;
+const VIEWS_URL = `${COUNTER_ROOT}/views?${COUNTER_QUERY}`;
+const COUNTED_KEY = "kaibo-site-visitor-counted-v2";
 const COUNTER_EVENT = "kaibo:visitor-count";
 let latestCount: number | null = null;
 
 type VisitorCounterProps = {
   label: string;
 };
-
-function getOrCreateVisitorId() {
-  try {
-    const savedId = window.localStorage.getItem(VISITOR_ID_KEY);
-    if (savedId) return savedId;
-
-    const visitorId = typeof window.crypto.randomUUID === "function"
-      ? window.crypto.randomUUID()
-      : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-
-    window.localStorage.setItem(VISITOR_ID_KEY, visitorId);
-    return visitorId;
-  } catch {
-    return null;
-  }
-}
 
 export function VisitorTracker() {
   useEffect(() => {
@@ -42,40 +28,39 @@ export function VisitorTracker() {
       try {
         wasCounted = window.localStorage.getItem(COUNTED_KEY) === "1";
       } catch {
-        // The counter service still applies its own anonymous uniqueness filter.
+        // Some private-browsing modes block local storage.
       }
 
       const shouldIncrement = isPublicSite && !wasCounted;
-      const options = new URLSearchParams({ unique: "true" });
-
-      if (shouldIncrement) {
-        const visitorId = getOrCreateVisitorId();
-        if (visitorId) options.set("userId", visitorId);
-      } else {
-        options.set("readOnly", "true");
-      }
 
       try {
-        const response = await fetch(`${COUNTER_URL}?${options.toString()}`, {
+        const requestOptions: RequestInit = {
           cache: "no-store",
           credentials: "omit",
           referrerPolicy: "no-referrer",
           signal: controller.signal,
-        });
-
-        if (!response.ok) throw new Error("Visitor counter is unavailable");
-
-        const data = await response.json() as { value?: number | string };
-        const nextCount = Number(data.value);
-        if (!Number.isFinite(nextCount) || nextCount < 0) throw new Error("Invalid visitor count");
+        };
 
         if (shouldIncrement) {
+          const trackingResponse = await fetch(TRACK_URL, requestOptions);
+          if (!trackingResponse.ok) throw new Error("Visitor tracking is unavailable");
+
           try {
             window.localStorage.setItem(COUNTED_KEY, "1");
+            window.localStorage.removeItem("kaibo-site-visitor-counted-v1");
+            window.localStorage.removeItem("kaibo-site-visitor-id-v1");
           } catch {
             // Some private-browsing modes block local storage.
           }
         }
+
+        const response = await fetch(VIEWS_URL, requestOptions);
+
+        if (!response.ok) throw new Error("Visitor counter is unavailable");
+
+        const data = await response.json() as { views?: number | string };
+        const nextCount = Number(data.views);
+        if (!Number.isFinite(nextCount) || nextCount < 0) throw new Error("Invalid visitor count");
 
         if (isMounted) {
           latestCount = Math.trunc(nextCount);

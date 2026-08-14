@@ -56,16 +56,21 @@ const copy = {
     research: {
       label: "Research experience",
       title: "Current lines of inquiry",
-      intro: "Three current projects examine how information environments, behavioral insights, and forecasting tools shape public and labor-market decisions.",
+      intro: "Four projects examine how information environments, behavioral insights, administrative frictions, and forecasting tools shape public and labor-market decisions.",
+      publishedLabel: "Published article",
       projectLabel: "Working paper",
       protocolLabel: "Study protocol",
       designLabel: "Research design",
+      frontiersTitle: "Risk–friction fit for digital public services",
+      frontiersBody: "A published conceptual framework for deciding whether a specific administrative friction should be retained, redesigned, tested, suspended, or removed as evidence changes.",
+      frontiersDate: "14 AUG 2026",
       projectOneTitle: "Digital administration & behavioral public policy",
       projectOneBody: "Designing a pragmatic randomized controlled trial in Osaka Prefecture to test whether redesigned envelopes, renewal forms, and procedural instructions can increase timely online filing for motor vehicle tax exemption renewals.",
       projectTwoTitle: "Behavioral forecasting & intervention choice",
       projectTwoBody: "Auditing archived GPT-4 forecasts to test whether directional accuracy adds useful quantitative information and improves choices among behavioral interventions.",
       projectThreeTitle: "Information frictions & student labor markets",
       projectThreeBody: "A pre-specified study of how Japanese/formal and Chinese/co-ethnic job-search channels may shape the part-time opportunities and wages visible to Chinese international students in Japan.",
+      supportFrontiers: "Frontiers in Behavioral Economics · 14 August 2026",
       supportOne: "Study protocol · The University of Osaka",
       supportTwo: "Working paper · SSRN 7127120",
       supportThree: "Research design · SSRN 7087178",
@@ -74,8 +79,12 @@ const copy = {
     publications: {
       label: "Publications & working papers",
       title: "Selected writing",
-      intro: "Research protocols and working papers in behavioral economics, public administration, and labor economics.",
+      intro: "A published article, research protocols, and working papers in behavioral economics, public administration, and labor economics.",
       author: "Kaibo Tang",
+      publishedArticle: "Published article · Frontiers in Behavioral Economics · 14 August 2026",
+      frontiersPaper: "Justification as a revisable state: a behavioral risk–friction fit framework for digital public services",
+      frontiersPaperShort: "Introduces behavioral risk–friction fit (BRFF), an auditable framework that links evidence about protection, burden, alternatives, and distribution to revisable decisions about retaining, redesigning, or removing administrative friction.",
+      frontiersMeta: "Front. Behav. Econ. 5:1936872 · DOI 10.3389/frbhe.2026.1936872",
       latest: "Working paper · SSRN · 2026",
       preprint: "Preprint · SSRN · 19 pages · Posted 13 July 2026",
       working: "Working paper · SSRN",
@@ -154,16 +163,21 @@ const copy = {
     research: {
       label: "研究経験",
       title: "現在の研究テーマ",
-      intro: "情報環境、行動科学の知見、予測手法が公共部門と労働市場の意思決定にどう関わるかを、三つの研究で検討しています。",
+      intro: "情報環境、行動科学の知見、行政上のフリクション、予測手法が公共部門と労働市場の意思決定にどう関わるかを、四つの研究で検討しています。",
+      publishedLabel: "掲載論文",
       projectLabel: "ワーキングペーパー",
       protocolLabel: "研究プロトコル",
       designLabel: "研究デザイン",
+      frontiersTitle: "デジタル公共サービスのリスク・フリクション適合",
+      frontiersBody: "変化する証拠に応じて、特定の行政フリクションを維持・再設計・検証・停止・撤去すべきかを判断する概念枠組みです。",
+      frontiersDate: "2026年8月14日",
       projectOneTitle: "デジタル行政と行動公共政策",
       projectOneBody: "大阪府における自動車税（種別割）減免更新を対象に、封筒、更新申請書、手続案内の改善が期限内のオンライン申請を促進するかを検証する、実用的ランダム化比較試験を設計しています。",
       projectTwoTitle: "行動予測と介入選択",
       projectTwoBody: "保存済みGPT-4予測を監査し、方向の正しさが有用な数量情報を加え、行動介入の選択を改善するかを検証しています。",
       projectThreeTitle: "情報摩擦と留学生の労働市場",
       projectThreeBody: "日本の中国人留学生を対象に、日本語・公的経路と中国語・同民族ネットワークを通じた求職が、目に入るアルバイト機会と賃金にどう関わるかを事前に定めた設計で検討します。",
+      supportFrontiers: "Frontiers in Behavioral Economics · 2026年8月14日",
       supportOne: "研究プロトコル · 大阪大学",
       supportTwo: "ワーキングペーパー · SSRN 7127120",
       supportThree: "研究デザイン · SSRN 7087178",
@@ -172,8 +186,12 @@ const copy = {
     publications: {
       label: "論文・ワーキングペーパー",
       title: "研究成果",
-      intro: "行動経済学、公共行政、労働経済学に関する研究プロトコルとワーキングペーパーです。",
+      intro: "行動経済学、公共行政、労働経済学に関する掲載論文、研究プロトコル、ワーキングペーパーです。",
       author: "Kaibo Tang（唐 楷博）",
+      publishedArticle: "掲載論文 · Frontiers in Behavioral Economics · 2026年8月14日",
+      frontiersPaper: "改訂可能な状態としての正当化――デジタル公共サービスのための行動的リスク・フリクション適合フレームワーク",
+      frontiersPaperShort: "保護効果、利用者負担、代替案、分配面の証拠を、行政フリクションの維持・再設計・撤去に関する改訂可能な判断へ結び付けるBRFFを提示します。",
+      frontiersMeta: "Front. Behav. Econ. 5:1936872 · DOI 10.3389/frbhe.2026.1936872",
       latest: "ワーキングペーパー · SSRN · 2026年",
       preprint: "プレプリント · SSRN · 19頁 · 2026年7月13日公開",
       working: "ワーキングペーパー · SSRN",
@@ -252,16 +270,21 @@ const copy = {
     research: {
       label: "研究经历",
       title: "当前研究方向",
-      intro: "通过三项研究考察信息环境、行为科学洞见与预测工具如何影响公共部门和劳动力市场中的决策。",
+      intro: "通过四项研究考察信息环境、行为科学洞见、行政摩擦与预测工具如何影响公共部门和劳动力市场中的决策。",
+      publishedLabel: "正式发表",
       projectLabel: "工作论文",
       protocolLabel: "研究方案",
       designLabel: "研究设计",
+      frontiersTitle: "数字公共服务的风险—摩擦适配",
+      frontiersBody: "提出一套概念框架，用于根据不断更新的证据判断具体行政摩擦应被保留、重新设计、继续检验、暂停还是移除。",
+      frontiersDate: "2026年8月14日",
       projectOneTitle: "数字行政与行为公共政策",
       projectOneBody: "围绕大阪府汽车税（按类别）减免续办程序，设计务实型随机对照试验，检验重新设计信封、续办表格和程序说明能否提高按时完成在线申报的比例。",
       projectTwoTitle: "行为预测与干预选择",
       projectTwoBody: "审计存档GPT-4预测，检验方向准确性是否提供有用的增量数量信息，并改善行为干预的选择。",
       projectThreeTitle: "信息摩擦与留学生劳动力市场",
       projectThreeBody: "以预先设定的研究设计，考察日本的中国留学生通过日语/正式渠道或中文/同族网络求职，是否会影响其可见的兼职机会与工资。",
+      supportFrontiers: "Frontiers in Behavioral Economics · 2026年8月14日",
       supportOne: "研究方案 · 大阪大学",
       supportTwo: "工作论文 · SSRN 7127120",
       supportThree: "研究设计 · SSRN 7087178",
@@ -270,8 +293,12 @@ const copy = {
     publications: {
       label: "论文与工作论文",
       title: "研究文章",
-      intro: "关于行为经济学、公共行政和劳动经济学的研究方案与工作论文。",
+      intro: "关于行为经济学、公共行政和劳动经济学的正式发表文章、研究方案与工作论文。",
       author: "唐楷博（Kaibo Tang）",
+      publishedArticle: "正式发表 · Frontiers in Behavioral Economics · 2026年8月14日",
+      frontiersPaper: "作为可修正状态的正当性：数字公共服务的行为风险—摩擦适配框架",
+      frontiersPaperShort: "提出行为风险—摩擦适配框架（BRFF），把保护效果、用户负担、替代方案与分配影响的证据，连接到对行政摩擦进行保留、重设或移除的可修正决策。",
+      frontiersMeta: "Front. Behav. Econ. 5:1936872 · DOI 10.3389/frbhe.2026.1936872",
       latest: "工作论文 · SSRN · 2026年",
       preprint: "预印本 · SSRN · 19页 · 2026年7月13日发布",
       working: "工作论文 · SSRN",
@@ -303,6 +330,7 @@ const copy = {
 } as const;
 
 const links = {
+  frontiersOverview: "/research/risk-friction-fit",
   paperOverview: "/research/nudge-study",
   auditOverview: "/research/gpt4-forecast-audit",
   auditSsrn: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7127120",
@@ -407,7 +435,7 @@ export default function Home() {
               <a className="button button-primary" href="#research">
                 {t.hero.explore}<span aria-hidden="true">↘</span>
               </a>
-              <a className="text-link" href={links.auditOverview}>
+              <a className="text-link" href={links.frontiersOverview}>
                 {t.hero.selected}<span aria-hidden="true">↗</span>
               </a>
             </div>
@@ -530,8 +558,24 @@ export default function Home() {
           </div>
 
           <div className="research-list">
-            <a className="research-card" href={links.paperOverview} aria-label={t.publications.overview}>
+            <a className="research-card research-card-wide research-card-frontiers" href={links.frontiersOverview} aria-label={t.publications.overview}>
               <div className="card-number">01</div>
+              <div className="card-main">
+                <div className="card-meta">
+                  <span>{t.research.publishedLabel}</span>
+                  <span>{t.research.frontiersDate}</span>
+                </div>
+                <h3>{t.research.frontiersTitle}</h3>
+                <p>{t.research.frontiersBody}</p>
+              </div>
+              <div className="card-foot">
+                <span>{t.research.supportFrontiers}</span>
+                <span className="card-arrow" aria-hidden="true">↗</span>
+              </div>
+            </a>
+
+            <a className="research-card" href={links.paperOverview} aria-label={t.publications.overview}>
+              <div className="card-number">02</div>
               <div className="card-main">
                 <div className="card-meta">
                   <span>{t.research.protocolLabel}</span>
@@ -547,7 +591,7 @@ export default function Home() {
             </a>
 
             <a className="research-card research-card-alt" href={links.auditOverview} aria-label={t.publications.overview}>
-              <div className="card-number">02</div>
+              <div className="card-number">03</div>
               <div className="card-main">
                 <div className="card-meta">
                   <span>{t.research.projectLabel}</span>
@@ -563,7 +607,7 @@ export default function Home() {
             </a>
 
             <a className="research-card research-card-wide research-card-network" href={links.informationOverview} aria-label={t.publications.overview}>
-              <div className="card-number">03</div>
+              <div className="card-number">04</div>
               <div className="card-main">
                 <div className="card-meta">
                   <span>{t.research.designLabel}</span>
@@ -597,6 +641,23 @@ export default function Home() {
                 <span className="publication-year">2026</span>
               </div>
               <div className="publication-body">
+                <p className="publication-type">{t.publications.publishedArticle}</p>
+                <h3>{t.publications.frontiersPaper}</h3>
+                {lang !== "en" && <p className="original-title">Justification as a revisable state: a behavioral risk–friction fit framework for digital public services</p>}
+                <p className="publication-author">{t.publications.author} · {t.publications.frontiersMeta}</p>
+                <p className="publication-teaser">{t.publications.frontiersPaperShort}</p>
+                <div className="publication-actions">
+                  <a href={links.frontiersOverview}>{t.publications.overview}<span aria-hidden="true">→</span></a>
+                </div>
+              </div>
+            </article>
+
+            <article className="publication">
+              <div className="publication-side">
+                <span className="publication-number">02</span>
+                <span className="publication-year">2026</span>
+              </div>
+              <div className="publication-body">
                 <p className="publication-type">{t.publications.latest}</p>
                 <h3>{t.publications.auditPaper}</h3>
                 {lang !== "en" && <p className="original-title">Beyond Directional Accuracy: Auditing Archived GPT-4 Forecasts for Behavioral Intervention Choice</p>}
@@ -610,7 +671,7 @@ export default function Home() {
 
             <article className="publication">
               <div className="publication-side">
-                <span className="publication-number">02</span>
+                <span className="publication-number">03</span>
                 <span className="publication-year">2026</span>
               </div>
               <div className="publication-body">
@@ -627,7 +688,7 @@ export default function Home() {
 
             <article className="publication">
               <div className="publication-side">
-                <span className="publication-number">03</span>
+                <span className="publication-number">04</span>
                 <span className="publication-year">2026</span>
               </div>
               <div className="publication-body">

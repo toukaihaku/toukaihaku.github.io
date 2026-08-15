@@ -64,11 +64,13 @@ export default function HeroParticleField() {
     if (!container) return;
 
     const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const finePointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
     let reducedMotion = reducedMotionQuery.matches;
+    let canTrackPointer = finePointerQuery.matches && !reducedMotion;
     const compact = window.matchMedia("(max-width: 760px)").matches;
     const saveData = "connection" in navigator &&
       Boolean((navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData);
-    const particleCount = saveData ? 24 : compact ? 40 : 82;
+    const particleCount = saveData ? 24 : compact ? 42 : 104;
 
     let renderer: Renderer;
     try {
@@ -120,8 +122,8 @@ export default function HeroParticleField() {
       fragment: fragmentShader,
       uniforms: {
         uTime: { value: 0 },
-        uSpread: { value: compact ? 5.4 : 7.2 },
-        uBaseSize: { value: compact ? 58 : 68 },
+        uSpread: { value: compact ? 5.6 : 7.5 },
+        uBaseSize: { value: compact ? 66 : 86 },
       },
       transparent: true,
       depthTest: false,
@@ -141,6 +143,13 @@ export default function HeroParticleField() {
     let lastTime = performance.now();
     let inView = true;
     const minimumFrameInterval = 1000 / (compact ? 30 : 60);
+    const pointer = {
+      currentX: 0,
+      currentY: 0,
+      clientX: 0,
+      clientY: 0,
+      inside: false,
+    };
 
     const render = (time: number) => {
       animationFrame = 0;
@@ -155,9 +164,25 @@ export default function HeroParticleField() {
       const delta = Math.min(frameElapsed, 50);
       lastTime = reducedMotion ? time : time - (frameElapsed % minimumFrameInterval);
       elapsed += delta * 0.035;
+      let targetX = 0;
+      let targetY = 0;
+
+      if (canTrackPointer && pointer.inside) {
+        const bounds = container.getBoundingClientRect();
+        const width = Math.max(bounds.width, 1);
+        const height = Math.max(bounds.height, 1);
+        targetX = Math.max(-1, Math.min(1, ((pointer.clientX - bounds.left) / width) * 2 - 1));
+        targetY = Math.max(-1, Math.min(1, -(((pointer.clientY - bounds.top) / height) * 2 - 1)));
+      }
+
+      const follow = 1 - Math.exp(-delta * 0.009);
+      pointer.currentX += (targetX - pointer.currentX) * follow;
+      pointer.currentY += (targetY - pointer.currentY) * follow;
       program.uniforms.uTime.value = elapsed * 0.001;
-      particles.rotation.x = Math.sin(elapsed * 0.00018) * 0.055;
-      particles.rotation.y = Math.cos(elapsed * 0.00024) * 0.085;
+      particles.position.x = pointer.currentX * 0.82;
+      particles.position.y = pointer.currentY * 0.58;
+      particles.rotation.x = Math.sin(elapsed * 0.00018) * 0.055 - pointer.currentY * 0.035;
+      particles.rotation.y = Math.cos(elapsed * 0.00024) * 0.085 + pointer.currentX * 0.05;
       particles.rotation.z += delta * 0.0000168;
       renderer.render({ scene: particles, camera });
 
@@ -189,20 +214,42 @@ export default function HeroParticleField() {
       if (document.hidden) stop();
       else start();
     };
+    const handlePointerMove = (event: PointerEvent) => {
+      if (!canTrackPointer) return;
+      pointer.clientX = event.clientX;
+      pointer.clientY = event.clientY;
+      pointer.inside = true;
+    };
+    const handlePointerLeave = () => {
+      pointer.inside = false;
+    };
+    const updatePointerCapability = () => {
+      canTrackPointer = finePointerQuery.matches && !reducedMotion;
+      if (!canTrackPointer) pointer.inside = false;
+    };
     const handleMotionPreference = (event: MediaQueryListEvent) => {
       reducedMotion = event.matches;
+      updatePointerCapability();
       if (reducedMotion) {
         stop();
+        pointer.currentX = 0;
+        pointer.currentY = 0;
+        particles.position.x = 0;
+        particles.position.y = 0;
         render(performance.now());
       } else {
         start();
       }
     };
 
+    const hero = container.closest<HTMLElement>(".hero");
     resizeObserver.observe(container);
     visibilityObserver.observe(container);
     document.addEventListener("visibilitychange", handleVisibilityChange);
     reducedMotionQuery.addEventListener("change", handleMotionPreference);
+    finePointerQuery.addEventListener("change", updatePointerCapability);
+    hero?.addEventListener("pointermove", handlePointerMove);
+    hero?.addEventListener("pointerleave", handlePointerLeave);
     resize();
 
     if (reducedMotion) render(performance.now());
@@ -214,6 +261,9 @@ export default function HeroParticleField() {
       visibilityObserver.disconnect();
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       reducedMotionQuery.removeEventListener("change", handleMotionPreference);
+      finePointerQuery.removeEventListener("change", updatePointerCapability);
+      hero?.removeEventListener("pointermove", handlePointerMove);
+      hero?.removeEventListener("pointerleave", handlePointerLeave);
       geometry.remove();
       program.remove();
       canvas.remove();

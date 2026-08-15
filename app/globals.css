@@ -247,7 +247,7 @@ button {
 .hero-particle-field {
   position: absolute;
   inset: 0;
-  opacity: 0.46;
+  opacity: 0.58;
   -webkit-mask-image: radial-gradient(circle at 68% 43%, #000 0 20%, rgba(0, 0, 0, 0.86) 42%, transparent 78%);
   mask-image: radial-gradient(circle at 68% 43%, #000 0 20%, rgba(0, 0, 0, 0.86) 42%, transparent 78%);
 }
@@ -277,7 +277,7 @@ button {
 }
 
 html[data-theme="dark"] .hero-particle-field {
-  opacity: 0.54;
+  opacity: 0.66;
 }
 
 html[data-theme="dark"] .hero-perspective-grid {
@@ -326,7 +326,6 @@ html[data-theme="dark"] .hero-perspective-grid {
 
 .display-name-text {
   display: block;
-  clip-path: inset(0 0 0 0);
   animation: display-line-reveal 920ms cubic-bezier(0.22, 0.78, 0.28, 1) both;
 }
 
@@ -343,12 +342,10 @@ html[data-theme="dark"] .hero-perspective-grid {
 @keyframes display-line-reveal {
   from {
     opacity: 0;
-    clip-path: inset(100% 0 0 0);
     transform: translateY(0.14em);
   }
   to {
     opacity: 1;
-    clip-path: inset(0 0 0 0);
     transform: translateY(0);
   }
 }
@@ -1610,7 +1607,7 @@ html[data-theme="dark"] .hero-perspective-grid {
   }
 
   .hero-particle-field {
-    opacity: 0.32;
+    opacity: 0.4;
     -webkit-mask-image: radial-gradient(circle at 58% 54%, #000 0 18%, rgba(0, 0, 0, 0.72) 44%, transparent 82%);
     mask-image: radial-gradient(circle at 58% 54%, #000 0 18%, rgba(0, 0, 0, 0.72) 44%, transparent 82%);
   }
@@ -1777,7 +1774,6 @@ html[data-theme="dark"] .hero-perspective-grid {
   .display-name-text {
     animation: none !important;
     opacity: 1;
-    clip-path: none;
     transform: none;
   }
   .publication.publication-reveal-pending,

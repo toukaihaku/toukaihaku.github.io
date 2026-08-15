@@ -1,5 +1,6 @@
-# Kaibo Tang — Academic Website
+# Kaibo Tang — Personal Site
 
-Personal academic website of Kaibo Tang / 唐楷博, an undergraduate student at the School of Economics, The University of Osaka.
+Static source for <https://toukaihaku.github.io/>.
 
-Published at [toukaihaku.github.io](https://toukaihaku.github.io/).
+The previous Next.js version is preserved by the Git tag `backup-1`.
+

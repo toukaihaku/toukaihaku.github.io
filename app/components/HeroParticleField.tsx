@@ -140,19 +140,20 @@ export default function HeroParticleField() {
     let elapsed = 0;
     let lastTime = performance.now();
     let inView = true;
-    const minimumFrameInterval = 1000 / 30;
+    const minimumFrameInterval = 1000 / (compact ? 30 : 60);
 
     const render = (time: number) => {
       animationFrame = 0;
       if (!inView || document.hidden) return;
 
-      if (!reducedMotion && time - lastTime < minimumFrameInterval) {
+      const frameElapsed = time - lastTime;
+      if (!reducedMotion && frameElapsed + 0.5 < minimumFrameInterval) {
         animationFrame = requestAnimationFrame(render);
         return;
       }
 
-      const delta = Math.min(time - lastTime, 50);
-      lastTime = time;
+      const delta = Math.min(frameElapsed, 50);
+      lastTime = reducedMotion ? time : time - (frameElapsed % minimumFrameInterval);
       elapsed += delta * 0.035;
       program.uniforms.uTime.value = elapsed * 0.001;
       particles.rotation.x = Math.sin(elapsed * 0.00018) * 0.055;

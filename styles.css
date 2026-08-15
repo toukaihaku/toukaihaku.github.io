@@ -33,8 +33,11 @@
   --trust-bg: #28282a;
   --trust-border: rgba(255, 255, 255, 0.4);
   --trust-text: #c4c2c3;
-  --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
-  --font-body: "PingFang SC", "PingFang TC", "Hiragino Sans", "Helvetica Neue", sans-serif;
+  --font-en-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  --font-ja-body: "Hiragino Sans", "Hiragino Kaku Gothic ProN", -apple-system, BlinkMacSystemFont, "Yu Gothic", YuGothic, Meiryo, sans-serif;
+  --font-zh-body: "PingFang SC", "Hiragino Sans GB", -apple-system, BlinkMacSystemFont, "Microsoft YaHei", sans-serif;
+  --font-sans: var(--font-en-body);
+  --font-body: var(--font-en-body);
   --font-display: "BubbledotICG-FinePos", "Geist Pixel Circle", monospace;
   --font-ja-display: "Fusion Pixel Japanese", var(--font-ja-serif);
   --font-zh-display: "Fusion Pixel Simplified Chinese", var(--font-zh-serif);
@@ -59,6 +62,21 @@ html {
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html[lang="en"] {
+  --font-sans: var(--font-en-body);
+  --font-body: var(--font-en-body);
+}
+
+html[lang="ja"] {
+  --font-sans: var(--font-ja-body);
+  --font-body: var(--font-ja-body);
+}
+
+html[lang^="zh"] {
+  --font-sans: var(--font-zh-body);
+  --font-body: var(--font-zh-body);
 }
 
 body {
@@ -1350,7 +1368,7 @@ body.menu-open {
 .work-original-title {
   margin: -6px 0 14px;
   color: #929292;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-en-body);
   font-size: 14px;
   font-style: italic;
   line-height: 1.5;
@@ -1636,7 +1654,7 @@ body.menu-open {
   max-width: 900px;
   margin: -4px 0 22px;
   color: #9c9c9c;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-en-body);
   font-size: clamp(14px, 1.4vw, 17px);
   font-style: italic;
   line-height: 1.5;
@@ -1896,17 +1914,17 @@ html[lang^="zh"] :is(
 }
 
 html[lang="ja"] .work-row h2 {
-  font-family: var(--font-ja-serif);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.14;
+  font-family: var(--font-ja-body);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.16;
 }
 
 html[lang^="zh"] .work-row h2 {
-  font-family: var(--font-zh-serif);
-  font-weight: 600;
-  letter-spacing: -0.018em;
-  line-height: 1.12;
+  font-family: var(--font-zh-body);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.16;
 }
 
 html[lang="ja"] .detail-title-wrap h1,

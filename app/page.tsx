@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import HeroParticleField from "./components/HeroParticleField";
+import SpotlightLink from "./components/SpotlightLink";
 import VisitorCounter from "./visitor-counter";
 
 type Lang = "en" | "ja" | "zh";
@@ -349,6 +351,7 @@ const links = {
 export default function Home() {
   const [lang, setLang] = useState<Lang>("en");
   const [dark, setDark] = useState(false);
+  const publicationsRef = useRef<HTMLDivElement>(null);
   const t = copy[lang];
 
   useEffect(() => {
@@ -369,6 +372,36 @@ export default function Home() {
     document.documentElement.dataset.theme = dark ? "dark" : "light";
     window.localStorage.setItem("kaibo-theme", dark ? "dark" : "light");
   }, [dark]);
+
+  useEffect(() => {
+    const root = publicationsRef.current;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!root || reduceMotion || !("IntersectionObserver" in window)) return;
+
+    const rows = Array.from(root.querySelectorAll<HTMLElement>(".publication"));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "0px 0px -8%", threshold: 0.08 },
+    );
+
+    rows.forEach((row) => {
+      if (row.getBoundingClientRect().top <= window.innerHeight * 0.9) {
+        row.classList.add("is-visible");
+        return;
+      }
+
+      row.classList.add("publication-reveal-pending");
+      observer.observe(row);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
@@ -415,13 +448,17 @@ export default function Home() {
 
       <main id="main-content">
         <section className="hero" id="top">
+          <div className="hero-atmosphere" aria-hidden="true">
+            <HeroParticleField />
+            <div className="hero-perspective-grid" />
+          </div>
           <div className="hero-orbit orbit-one" aria-hidden="true" />
           <div className="hero-orbit orbit-two" aria-hidden="true" />
           <div className="hero-copy">
             <p className="eyebrow reveal delay-one">{t.hero.issue}</p>
-            <h1 className="display-name reveal delay-two">
-              <span>Kaibo</span>
-              <span>Tang</span>
+            <h1 className="display-name">
+              <span className="display-name-line"><span className="display-name-text">Kaibo</span></span>
+              <span className="display-name-line"><span className="display-name-text">Tang</span></span>
             </h1>
             <div className="hero-bottom reveal delay-three">
               <div>
@@ -558,7 +595,12 @@ export default function Home() {
           </div>
 
           <div className="research-list">
-            <a className="research-card research-card-wide research-card-frontiers" href={links.frontiersOverview} aria-label={t.publications.overview}>
+            <SpotlightLink
+              className="research-card research-card-wide research-card-frontiers"
+              href={links.frontiersOverview}
+              aria-label={`${t.publications.overview}: ${t.research.frontiersTitle}`}
+              spotlightColor="color-mix(in srgb, var(--accent) 20%, transparent)"
+            >
               <div className="card-number">01</div>
               <div className="card-main">
                 <div className="card-meta">
@@ -572,9 +614,14 @@ export default function Home() {
                 <span>{t.research.supportFrontiers}</span>
                 <span className="card-arrow" aria-hidden="true">↗</span>
               </div>
-            </a>
+            </SpotlightLink>
 
-            <a className="research-card" href={links.paperOverview} aria-label={t.publications.overview}>
+            <SpotlightLink
+              className="research-card"
+              href={links.paperOverview}
+              aria-label={`${t.publications.overview}: ${t.research.projectOneTitle}`}
+              spotlightColor="color-mix(in srgb, var(--blue) 16%, transparent)"
+            >
               <div className="card-number">02</div>
               <div className="card-main">
                 <div className="card-meta">
@@ -588,9 +635,14 @@ export default function Home() {
                 <span>{t.research.supportOne}</span>
                 <span className="card-arrow" aria-hidden="true">↗</span>
               </div>
-            </a>
+            </SpotlightLink>
 
-            <a className="research-card research-card-alt" href={links.auditOverview} aria-label={t.publications.overview}>
+            <SpotlightLink
+              className="research-card research-card-alt"
+              href={links.auditOverview}
+              aria-label={`${t.publications.overview}: ${t.research.projectTwoTitle}`}
+              spotlightColor="color-mix(in srgb, var(--accent) 18%, transparent)"
+            >
               <div className="card-number">03</div>
               <div className="card-main">
                 <div className="card-meta">
@@ -604,9 +656,14 @@ export default function Home() {
                 <span>{t.research.supportTwo}</span>
                 <span className="card-arrow" aria-hidden="true">↗</span>
               </div>
-            </a>
+            </SpotlightLink>
 
-            <a className="research-card research-card-wide research-card-network" href={links.informationOverview} aria-label={t.publications.overview}>
+            <SpotlightLink
+              className="research-card research-card-wide research-card-network"
+              href={links.informationOverview}
+              aria-label={`${t.publications.overview}: ${t.research.projectThreeTitle}`}
+              spotlightColor="color-mix(in srgb, var(--blue) 16%, transparent)"
+            >
               <div className="card-number">04</div>
               <div className="card-main">
                 <div className="card-meta">
@@ -620,7 +677,7 @@ export default function Home() {
                 <span>{t.research.supportThree}</span>
                 <span className="card-arrow" aria-hidden="true">↗</span>
               </div>
-            </a>
+            </SpotlightLink>
           </div>
         </section>
 
@@ -634,7 +691,7 @@ export default function Home() {
             <p>{t.publications.intro}</p>
           </div>
 
-          <div className="publication-stack">
+          <div className="publication-stack" ref={publicationsRef}>
             <article className="publication featured-publication">
               <div className="publication-side">
                 <span className="publication-number">01</span>

@@ -1,38 +1,8 @@
 # Third-party notices
 
-## React Bits
-
-The research-card spotlight interaction is adapted from React Bits' `SpotlightCard` component. The hero's 3D particle field is adapted from its `Particles` background.
-
-- Source: https://github.com/DavidHDev/react-bits
-- Component: https://reactbits.dev/components/spotlight-card
-- Background: https://reactbits.dev/backgrounds/particles
-
-MIT + Commons Clause License Condition v1.0
-
-Copyright (c) 2026 David Haz
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, and distribute the Software **as part of
-an application, website, or product**, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-### Commons Clause Restriction
-
-You may use this Software, including for any commercial purpose, **so long as
-you do not sell, sublicense, or redistribute the components themselves-whether
-alone, in a bundle, or as a ported version.**
-
-### No Warranty
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+- Geist Pixel Circle is distributed under the SIL Open Font License 1.1.
+- Fusion Pixel Font is distributed under the SIL Open Font License 1.1 and is loaded from the project's official font host.
+- Font Awesome Free is distributed under its published free licenses and is loaded from cdnjs.
+- Inter is distributed under the SIL Open Font License 1.1 and is loaded from Google Fonts.
+- Bubbledot ICG Fine Positive is loaded from OnlineWebFonts under the terms provided by that service.
+- ORCID iD artwork is used unchanged and links to the associated ORCID record in accordance with ORCID's brand and display guidance.

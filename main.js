@@ -115,7 +115,7 @@
           ["*", "The University of Osaka", "School of Economics", LINKS.osaka],
         ],
       },
-      common: { close: "Close", view: "View source", pdf: "Publisher PDF", back: "Back to top", updated: "Updated 2026", detail: "Research overview" },
+      common: { close: "Close", return: "BACK", returnAria: "Back to previous page", view: "View source", pdf: "Publisher PDF", back: "Back to top", updated: "Updated 2026", detail: "Research overview" },
       teaching: {
         cardType: "Teaching experience · EJU preparation · Osaka",
         shortTitle: "Teaching across language, society, and mathematics",
@@ -205,7 +205,7 @@
           ["*", "大阪大学", "経済学部", LINKS.osaka],
         ],
       },
-      common: { close: "閉じる", view: "掲載元を見る", pdf: "出版社PDF", back: "先頭へ", updated: "2026年更新", detail: "研究紹介" },
+      common: { close: "閉じる", return: "戻る", returnAria: "前のページに戻る", view: "掲載元を見る", pdf: "出版社PDF", back: "先頭へ", updated: "2026年更新", detail: "研究紹介" },
       teaching: {
         cardType: "教育経験 · EJU対策 · 大阪",
         shortTitle: "日本語・総合科目・数学を横断して教える",
@@ -295,7 +295,7 @@
           ["*", "大阪大学", "经济学部", LINKS.osaka],
         ],
       },
-      common: { close: "关闭", view: "查看来源", pdf: "出版社 PDF", back: "回到顶部", updated: "更新于2026年", detail: "研究介绍" },
+      common: { close: "关闭", return: "返回", returnAria: "返回之前的页面", view: "查看来源", pdf: "出版社 PDF", back: "回到顶部", updated: "更新于2026年", detail: "研究介绍" },
       teaching: {
         cardType: "教学经历 · EJU备考 · 大阪",
         shortTitle: "跨越语言、社会与数学的教学",
@@ -578,6 +578,8 @@
   const detailDialog = document.querySelector("#detail-dialog");
   const detailContent = document.querySelector("#detail-content");
   const detailClose = document.querySelector(".detail-close");
+  const detailReturn = document.querySelector(".detail-return");
+  const detailReturnLabel = document.querySelector(".detail-return-label");
   const routeStatus = document.querySelector("#route-status");
   const burger = document.querySelector(".burger");
   const menuWrap = document.querySelector(".mobile-menu-wrap");
@@ -713,6 +715,8 @@
 
     document.querySelector(".skip-link").textContent = language === "en" ? "Skip to content" : language === "ja" ? "本文へ移動" : "跳转到正文";
     detailClose.setAttribute("aria-label", t.common.close);
+    detailReturn.setAttribute("aria-label", t.common.returnAria);
+    detailReturnLabel.textContent = t.common.return;
   };
 
   const panelHeader = (kicker, title, intro, id) => `
@@ -932,6 +936,13 @@
           : "profile/academic";
     }
 
+    const arrivedFromBaseView = detailSlug && (
+      previousRoute.startsWith("work/") || previousRoute.startsWith("profile/")
+    );
+    if (arrivedFromBaseView) {
+      history.replaceState({ ...(history.state || {}), kaiboDetailOrigin: lastBaseRoute }, "");
+    }
+
     setActiveView(view);
     document.querySelectorAll(".mobile-menu > a[data-nav]").forEach((link) => {
       const href = link.getAttribute("href");
@@ -945,7 +956,8 @@
     if (view === "profile") renderProfile(mode);
     if (view === "work") renderWork(mode);
     if (view === "contact") renderContact();
-    if (!detailSlug && currentRoute !== previousRoute) {
+    const returningFromDetail = previousRoute.startsWith("research/") || previousRoute.startsWith("teaching/");
+    if (!detailSlug && currentRoute !== previousRoute && !returningFromDetail) {
       document.querySelector(`[data-view="${view}"] .panel-scroll`)?.scrollTo({ top: 0, behavior: "auto" });
     }
 
@@ -955,7 +967,10 @@
       if (detailDialog.open) detailDialog.close();
       document.title = baseTitle;
       if (focus) {
-        window.setTimeout(() => document.querySelector(`[data-view="${view}"] h1`)?.focus({ preventScroll: true }), 30);
+        const focusTarget = returningFromDetail
+          ? document.querySelector(`[data-view="${view}"] a[href="#${previousRoute}"]`)
+          : document.querySelector(`[data-view="${view}"] h1`);
+        window.setTimeout(() => focusTarget?.focus({ preventScroll: true }), 30);
       }
     }
 
@@ -1103,6 +1118,11 @@
   document.querySelectorAll(".mobile-menu a").forEach((link) => link.addEventListener("click", () => setMenu(false, true)));
   document.addEventListener("keydown", (event) => {
     const menuOpen = burger?.getAttribute("aria-expanded") === "true";
+    if (event.key === "Escape" && detailDialog?.open) {
+      event.preventDefault();
+      returnToPreviousView();
+      return;
+    }
     if (event.key === "Escape" && menuOpen) {
       setMenu(false, true);
       return;
@@ -1131,10 +1151,18 @@
     }
     if (event.target.closest(".detail-back")) detailContent.scrollTo({ top: 0, behavior: reduceMotion.matches ? "auto" : "smooth" });
   });
-  detailClose?.addEventListener("click", () => { location.hash = `#${lastBaseRoute}`; });
+  const returnToPreviousView = () => {
+    if (history.state?.kaiboDetailOrigin === lastBaseRoute && history.length > 1) {
+      history.back();
+      return;
+    }
+    location.replace(`#${lastBaseRoute}`);
+  };
+  detailReturn?.addEventListener("click", returnToPreviousView);
+  detailClose?.addEventListener("click", returnToPreviousView);
   detailDialog?.addEventListener("cancel", (event) => {
     event.preventDefault();
-    location.hash = `#${lastBaseRoute}`;
+    returnToPreviousView();
   });
   document.querySelector(".skip-link")?.addEventListener("click", (event) => {
     event.preventDefault();

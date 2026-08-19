@@ -177,10 +177,16 @@
     <dialog class="detail-dialog" id="detail-dialog" aria-labelledby="detail-title">
       <div class="detail-shell">
         <header class="detail-topbar">
-          <a class="detail-brand route-link" href="#home">
-            <img src="assets/logo.webp" alt="" width="40" height="40" />
-            <span>Kaibo Tang</span>
-          </a>
+          <div class="detail-leading">
+            <button class="detail-return" type="button" aria-label="Back to previous page">
+              <span class="detail-return-glyph fa-solid fa-arrow-left" aria-hidden="true"></span>
+              <span class="detail-return-label">BACK</span>
+            </button>
+            <a class="detail-brand route-link" href="#home">
+              <img src="assets/logo.webp" alt="" width="40" height="40" />
+              <span>Kaibo Tang</span>
+            </a>
+          </div>
           <div class="detail-actions">
             <div class="detail-language" role="group" aria-label="Language">
               <button class="active" type="button" data-lang="en" aria-pressed="true">EN</button>

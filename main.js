@@ -576,6 +576,7 @@
   const workPanel = document.querySelector("#work-panel");
   const contactPanel = document.querySelector("#contact-panel");
   const detailDialog = document.querySelector("#detail-dialog");
+  const detailShell = detailDialog.querySelector(".detail-shell");
   const detailContent = document.querySelector("#detail-content");
   const detailClose = document.querySelector(".detail-close");
   const detailReturn = document.querySelector(".detail-return");
@@ -601,6 +602,16 @@
   let lastBaseRoute = "work/research";
   let counted = false;
   let visitorCount = null;
+  let detailPhase = "closed";
+  let activeDetailRoute = null;
+  let detailTransitionToken = 0;
+  let detailTransitionTimer = 0;
+  let detailTransitionCleanup = null;
+  let detailTitleFocusTimer = 0;
+  let returnNavigationFallbackTimer = 0;
+  let returnNavigationPending = false;
+  let pendingDetailOriginRoute = null;
+  let pendingDetailFocus = false;
 
   const visitorCountText = () => visitorCount === null
     ? "—"
@@ -835,9 +846,147 @@
     syncVisitorPlaque();
   };
 
-  const renderDetail = (slug) => {
+  const isDetailRoute = (routeName) => routeName.startsWith("research/") || routeName.startsWith("teaching/");
+
+  const clearDetailTransitionWait = () => {
+    if (detailTransitionTimer) {
+      window.clearTimeout(detailTransitionTimer);
+      detailTransitionTimer = 0;
+    }
+    detailTransitionCleanup?.();
+    detailTransitionCleanup = null;
+  };
+
+  const clearReturnNavigationFallback = () => {
+    if (!returnNavigationFallbackTimer) return;
+    window.clearTimeout(returnNavigationFallbackTimer);
+    returnNavigationFallbackTimer = 0;
+  };
+
+  const setDetailPhase = (phase) => {
+    detailPhase = phase;
+    detailDialog.dataset.detailPhase = phase;
+  };
+
+  const rememberDetailOrigin = (trigger) => {
+    const rect = trigger.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    detailDialog.style.setProperty("--detail-origin-x", `${((centerX / Math.max(1, window.innerWidth)) * 100).toFixed(2)}%`);
+    detailDialog.style.setProperty("--detail-origin-y", `${((centerY / Math.max(1, window.innerHeight)) * 100).toFixed(2)}%`);
+  };
+
+  const waitForDetailExit = (token, complete) => {
+    if (reduceMotion.matches) {
+      complete();
+      return;
+    }
+
+    let finished = false;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      clearDetailTransitionWait();
+      if (token === detailTransitionToken) complete();
+    };
+    const onTransitionEnd = (event) => {
+      if (event.target === detailShell && event.propertyName === "transform") finish();
+    };
+
+    detailShell.addEventListener("transitionend", onTransitionEnd);
+    detailTransitionCleanup = () => detailShell.removeEventListener("transitionend", onTransitionEnd);
+    detailTransitionTimer = window.setTimeout(finish, 320);
+  };
+
+  const focusAfterDetailExit = () => {
+    if (!pendingDetailFocus) return;
+    const originRoute = pendingDetailOriginRoute;
+    window.requestAnimationFrame(() => {
+      const view = page.dataset.activeView;
+      const focusTarget = originRoute
+        ? document.querySelector(`[data-view="${view}"] a[href="#${originRoute}"]`)
+        : null;
+      (focusTarget?.isConnected ? focusTarget : document.querySelector(`[data-view="${view}"] h1`))
+        ?.focus({ preventScroll: true });
+    });
+  };
+
+  const finishDetailExit = (token) => {
+    if (token !== detailTransitionToken || isDetailRoute(currentRoute)) return;
+    clearDetailTransitionWait();
+    if (detailDialog.open) detailDialog.close();
+    setDetailPhase("closed");
+    activeDetailRoute = null;
+    returnNavigationPending = false;
+    document.title = baseTitle;
+    focusAfterDetailExit();
+    pendingDetailOriginRoute = null;
+    pendingDetailFocus = false;
+  };
+
+  const beginDetailExit = ({ originRoute, focus }) => {
+    pendingDetailOriginRoute = originRoute || pendingDetailOriginRoute || activeDetailRoute;
+    pendingDetailFocus ||= Boolean(focus);
+    if (!detailDialog.open) {
+      setDetailPhase("closed");
+      activeDetailRoute = null;
+      returnNavigationPending = false;
+      document.title = baseTitle;
+      focusAfterDetailExit();
+      pendingDetailOriginRoute = null;
+      pendingDetailFocus = false;
+      return;
+    }
+    if (detailPhase === "closing") return;
+
+    clearDetailTransitionWait();
+    window.clearTimeout(detailTitleFocusTimer);
+    const token = ++detailTransitionToken;
+    setDetailPhase("closing");
+    waitForDetailExit(token, () => finishDetailExit(token));
+  };
+
+  const cancelDetailExit = () => {
+    clearDetailTransitionWait();
+    ++detailTransitionToken;
+    returnNavigationPending = false;
+    pendingDetailOriginRoute = null;
+    pendingDetailFocus = false;
+    setDetailPhase("open");
+  };
+
+  const openDetailDialog = (routeName, { focusTitle }) => {
+    clearDetailTransitionWait();
+    window.clearTimeout(detailTitleFocusTimer);
+    const token = ++detailTransitionToken;
+    activeDetailRoute = routeName;
+    returnNavigationPending = false;
+    pendingDetailOriginRoute = null;
+    pendingDetailFocus = false;
+    setDetailPhase("opening");
+    if (!detailDialog.open) detailDialog.showModal();
+
+    const reveal = () => {
+      if (token !== detailTransitionToken || !detailDialog.open || currentRoute !== routeName) return;
+      setDetailPhase("open");
+    };
+    if (reduceMotion.matches) reveal();
+    else window.requestAnimationFrame(() => window.requestAnimationFrame(reveal));
+
+    if (focusTitle) {
+      detailTitleFocusTimer = window.setTimeout(
+        () => document.querySelector("#detail-title")?.focus({ preventScroll: true }),
+        reduceMotion.matches ? 0 : 60,
+      );
+    }
+  };
+
+  const renderDetail = (slug, { resetScroll = true } = {}) => {
     const record = DETAILS[slug];
     if (!record) return false;
+    window.clearTimeout(detailTitleFocusTimer);
+    detailTitleFocusTimer = 0;
+    const previousScrollTop = detailContent.scrollTop;
     const t = record[language];
     const common = COPY[language].common;
     const originalTitle = language !== "en" && record.originalTitle
@@ -874,10 +1023,8 @@
         </section>`).join("")}
       <footer class="detail-endcap"><p>${escapeHTML(t.citation)}</p><button class="detail-button detail-back" type="button">${escapeHTML(common.back)} ↑</button></footer>`;
 
-    detailContent.scrollTop = 0;
-    if (!detailDialog.open) detailDialog.showModal();
+    detailContent.scrollTop = resetScroll ? 0 : previousScrollTop;
     document.title = `${t.title} | Kaibo Tang`;
-    window.setTimeout(() => document.querySelector("#detail-title")?.focus({ preventScroll: true }), 40);
     return true;
   };
 
@@ -900,6 +1047,7 @@
   const route = ({ focus = true } = {}) => {
     const previousRoute = currentRoute;
     currentRoute = normalizeRoute();
+    if (currentRoute !== previousRoute) clearReturnNavigationFallback();
     const parts = currentRoute.split("/");
     let view = "home";
     let mode = "";
@@ -962,15 +1110,27 @@
     }
 
     if (detailSlug) {
-      renderDetail(detailSlug);
+      const sameDetail = detailDialog.open && activeDetailRoute === currentRoute;
+      if (sameDetail && detailPhase === "closing") cancelDetailExit();
+      renderDetail(detailSlug, { resetScroll: !sameDetail });
+      if (!sameDetail) openDetailDialog(currentRoute, { focusTitle: focus });
+    } else if (detailDialog.open) {
+      beginDetailExit({
+        originRoute: returningFromDetail ? previousRoute : activeDetailRoute,
+        focus,
+      });
     } else {
-      if (detailDialog.open) detailDialog.close();
+      setDetailPhase("closed");
+      activeDetailRoute = null;
+      returnNavigationPending = false;
       document.title = baseTitle;
       if (focus) {
-        const focusTarget = returningFromDetail
-          ? document.querySelector(`[data-view="${view}"] a[href="#${previousRoute}"]`)
-          : document.querySelector(`[data-view="${view}"] h1`);
-        window.setTimeout(() => focusTarget?.focus({ preventScroll: true }), 30);
+        window.requestAnimationFrame(() => {
+          const focusTarget = returningFromDetail
+            ? document.querySelector(`[data-view="${page.dataset.activeView}"] a[href="#${previousRoute}"]`)
+            : document.querySelector(`[data-view="${page.dataset.activeView}"] h1`);
+          focusTarget?.focus({ preventScroll: true });
+        });
       }
     }
 
@@ -1118,11 +1278,6 @@
   document.querySelectorAll(".mobile-menu a").forEach((link) => link.addEventListener("click", () => setMenu(false, true)));
   document.addEventListener("keydown", (event) => {
     const menuOpen = burger?.getAttribute("aria-expanded") === "true";
-    if (event.key === "Escape" && detailDialog?.open) {
-      event.preventDefault();
-      returnToPreviousView();
-      return;
-    }
     if (event.key === "Escape" && menuOpen) {
       setMenu(false, true);
       return;
@@ -1143,6 +1298,8 @@
   });
   window.addEventListener("resize", () => { if (window.innerWidth > 720) setMenu(false); });
   document.addEventListener("click", (event) => {
+    const detailTrigger = event.target.closest('a[href^="#research/"], a[href^="#teaching/"]');
+    if (detailTrigger) rememberDetailOrigin(detailTrigger);
     const languageButton = event.target.closest("[data-lang]");
     if (languageButton) {
       const inMobileMenu = Boolean(languageButton.closest(".mobile-menu"));
@@ -1151,18 +1308,29 @@
     }
     if (event.target.closest(".detail-back")) detailContent.scrollTo({ top: 0, behavior: reduceMotion.matches ? "auto" : "smooth" });
   });
-  const returnToPreviousView = () => {
+  const requestDetailReturn = () => {
+    if (returnNavigationPending || detailPhase === "closing") return;
+    returnNavigationPending = true;
+    const requestedDetailRoute = currentRoute;
+    const fallbackRoute = lastBaseRoute;
     if (history.state?.kaiboDetailOrigin === lastBaseRoute && history.length > 1) {
+      clearReturnNavigationFallback();
+      returnNavigationFallbackTimer = window.setTimeout(() => {
+        returnNavigationFallbackTimer = 0;
+        if (returnNavigationPending && currentRoute === requestedDetailRoute && isDetailRoute(normalizeRoute())) {
+          location.replace(`#${fallbackRoute}`);
+        }
+      }, 420);
       history.back();
       return;
     }
     location.replace(`#${lastBaseRoute}`);
   };
-  detailReturn?.addEventListener("click", returnToPreviousView);
-  detailClose?.addEventListener("click", returnToPreviousView);
+  detailReturn?.addEventListener("click", requestDetailReturn);
+  detailClose?.addEventListener("click", requestDetailReturn);
   detailDialog?.addEventListener("cancel", (event) => {
     event.preventDefault();
-    returnToPreviousView();
+    requestDetailReturn();
   });
   document.querySelector(".skip-link")?.addEventListener("click", (event) => {
     event.preventDefault();

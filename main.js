@@ -12,6 +12,7 @@
     chinichi: "https://chinichi-edu.jp/xiaoquDetail/osaka.html",
     map: "https://maps.app.goo.gl/uZMq1k3jL5CSSRwF9?g_st=ic",
     brff: "https://doi.org/10.3389/frbhe.2026.1936872",
+    aiClaims: "https://doi.org/10.1016/j.ssaho.2026.103760",
     brffPdf: "https://www.frontiersin.org/journals/behavioral-economics/articles/10.3389/frbhe.2026.1936872/pdf",
     audit: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7127120",
     nudge: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7097298",
@@ -25,10 +26,11 @@
   const COUNTER_COUNTED_KEY = "kaibo-site-visitor-counted-v2";
 
   const WORK_META = [
-    { slug: "risk-friction-fit", number: "01", source: LINKS.brff, pdf: LINKS.brffPdf, featured: true },
-    { slug: "nudge-study", number: "02", source: LINKS.nudge },
-    { slug: "gpt4-forecast-audit", number: "03", source: LINKS.audit },
-    { slug: "information-frictions", number: "04", source: LINKS.information },
+    { slug: "ai-behavioral-claims", number: "01", source: LINKS.aiClaims, featured: true },
+    { slug: "risk-friction-fit", number: "02", source: LINKS.brff, pdf: LINKS.brffPdf },
+    { slug: "nudge-study", number: "03", source: LINKS.nudge },
+    { slug: "gpt4-forecast-audit", number: "04", source: LINKS.audit },
+    { slug: "information-frictions", number: "05", source: LINKS.information },
   ];
 
   const COPY = {
@@ -39,7 +41,7 @@
         lead: "Exploring how behavioral insights, institutional design, and digital public services can make public administration more accessible and effective.",
         cta: "Explore research",
       },
-      stats: { research: "Research works", published: "Published article", subjects: "EJU subjects", languages: "Site languages" },
+      stats: { research: "Research works", published: "Published articles", subjects: "EJU subjects", languages: "Site languages" },
       profile: {
         kicker: "Profile · Osaka, Japan · 2026",
         title: "Economics where institutions meet everyday decisions.",
@@ -66,12 +68,19 @@
       },
       work: {
         kicker: "Research & writing · 2026",
-        title: "Four inquiries, one concern: better public decisions.",
+        title: "Five inquiries, one concern: better public decisions.",
         intro: "Current work examines information environments, behavioral insights, administrative friction, and forecasting tools across public and labor-market decisions.",
         tabs: { research: "Research", writing: "Writing" },
         overview: "Open overview",
         source: "Published source",
         works: [
+          {
+            type: "Published article · AI & behavioral identification",
+            shortTitle: "Auditing behavioral claims about AI",
+            title: "Auditing behavioral claims about AI: Two public-data applications",
+            summary: "A five-coordinate audit of what public records can support about AI-mediated behavior, applied to Wikipedia’s RevertRisk rollout and a registered generative-AI experiment.",
+            meta: "Social Sciences & Humanities Open 14:103760 · 2026 · DOI 10.1016/j.ssaho.2026.103760",
+          },
           {
             type: "Published article · Conceptual Analysis",
             shortTitle: "Risk–friction fit for digital public services",
@@ -163,6 +172,13 @@
         source: "掲載元を見る",
         works: [
           {
+            type: "掲載論文 · AIと行動の識別",
+            shortTitle: "AIに関する行動上の主張を監査する",
+            title: "AIに関する行動上の主張の監査――公開データを用いた二つの応用",
+            summary: "AIを介した行動について公開記録から何が言えるかを五つの観点で監査し、WikipediaのRevertRisk導入と登録済み生成AI実験に適用した研究です。",
+            meta: "Social Sciences & Humanities Open 14:103760 · 2026年 · DOI 10.1016/j.ssaho.2026.103760",
+          },
+          {
             type: "掲載論文 · Conceptual Analysis",
             shortTitle: "デジタル公共サービスのリスク・フリクション適合",
             title: "改訂可能な状態としての正当化――デジタル公共サービスのための行動的リスク・フリクション適合フレームワーク",
@@ -246,12 +262,19 @@
       },
       work: {
         kicker: "研究与文章 · 2026",
-        title: "围绕更好公共决策的四项研究。",
+        title: "围绕更好公共决策的五项研究。",
         intro: "考察信息环境、行为科学洞见、行政摩擦与预测工具如何影响公共部门和劳动力市场中的决策。",
         tabs: { research: "研究", writing: "文章" },
         overview: "打开研究介绍",
         source: "查看发表来源",
         works: [
+          {
+            type: "正式发表 · AI与行为识别",
+            shortTitle: "审计关于AI的行为主张",
+            title: "审计关于AI的行为主张：两项公开数据应用",
+            summary: "通过五个维度审计公开记录能够支持何种AI行为主张，并应用于维基百科RevertRisk上线与一项已注册的生成式AI实验。",
+            meta: "Social Sciences & Humanities Open 14:103760 · 2026年 · DOI 10.1016/j.ssaho.2026.103760",
+          },
           {
             type: "正式发表 · Conceptual Analysis",
             shortTitle: "数字公共服务的风险—摩擦适配",
@@ -305,6 +328,59 @@
   };
 
   const DETAILS = {
+    "ai-behavioral-claims": {
+      number: "103760",
+      source: LINKS.aiClaims,
+      originalTitle: "Auditing behavioral claims about AI: Two public-data applications",
+      en: {
+        kicker: "Published article · AI · Behavioral identification",
+        status: "Social Sciences & Humanities Open · 2026",
+        title: "Auditing behavioral claims about AI: Two public-data applications",
+        standfirst: "What can public records tell us about how AI changes behavior? This study develops an estimand-specific audit that separates observable evidence from claims about causal effects and behavioral mechanisms.",
+        author: "Kaibo Tang · School of Economics, The University of Osaka",
+        facts: [["Article", "Regular Article"], ["Journal", "Social Sciences & Humanities Open"], ["Record", "Volume 14 · Article 103760"], ["DOI", "10.1016/j.ssaho.2026.103760"]],
+        sections: [
+          { label: "Research question", title: "From an AI intervention to a behavioral claim: which links are observed?", intro: "An AI tool may change a reviewer’s workflow while the response of interest belongs to a contributor. Deployment records alone do not show whether the reviewer used the tool, whether the contributor perceived its feedback, or why subsequent behavior changed.", cards: [["Define the target", "An estimand card specifies treatment, unit, population, time horizon, outcome, weighting, and the contrast of interest."], ["Trace the evidence", "Distinguish interface availability, actual use, delivered feedback, awareness, and subsequent behavior."], ["State what follows", "Report the claims each observed link supports and the missing evidence needed for stronger conclusions."]] },
+          { label: "Audit framework", title: "Five coordinates, each with its own evidence requirements.", intro: "A deterministic rule system turns source-addressable evidence into a claim profile. Unknown evidence does not license a positive claim, and strength in one coordinate cannot offset a missing link in another.", cards: [["Treatment recoverability", "Can the intended intervention be recovered from the record, without confusing availability with use?"], ["Assignment-mechanism fidelity", "Does the analysis reflect the operational allocation rule and its exceptions?"], ["Outcome-population observability", "Whose outcomes are observed, and is the target population known?"], ["Counterfactual adequacy", "Is a credible untreated path supported by the design and diagnostics?"], ["Behavioral-mechanism discriminability", "Do observed variables distinguish discouragement, repair, attention, or other proposed explanations?"]], note: "The output is a coordinate-specific record of permitted and withheld claims, not an overall evidence score." },
+          { label: "Application 01 · Wikipedia", title: "Availability is observable; use and perception are not.", intro: "The 2025 RevertRisk rollout records when an AI-assisted interface became available. Purposeful batching does not supply a random assignment law, and public logs do not reveal reviewer use or contributor awareness.", cards: [["What the record supports", "A dated availability statement and a descriptive contrast for a fixed observable contributor cohort."], ["Attainable completion interval", "Field-compatible completion gives [0.017316, 0.019146] for one binary feedback channel."], ["What remains unresolved", "The interval does not identify a causal effect, repair the counterfactual, or distinguish behavioral mechanisms."]], note: "These bounds concern the specified fixed-cohort binary channel; they do not extend to hidden contributors or general contribution counts." },
+          { label: "Application 02 · Generative AI", title: "A documented randomized design and a reconstructible public record are separate questions.", intro: "Public files from Noy and Zhang’s registered experiment document intended allocation. Repeated identifiers and unresolved first-assignment lineage, however, prevent a third party from reconstructing a person-level intention-to-treat mapping from those files.", cards: [["Public-file audit", "565 qualifying attempts correspond to 535 unique IDs; 27 IDs repeat and 17 appear under both arms."], ["Alternative constructions", "The source-cleaned 453-ID sample and the audit’s earliest-qualifying-row 535-ID sample follow different rules and are not nested."], ["Interpretation", "Selected-sample contrasts remain descriptive. The finding does not establish that the original experiment’s randomization failed."]] },
+          { label: "Contribution & reuse", title: "Make the boundary of a behavioral claim inspectable.", intro: "The paired applications show how design quality and public verifiability can diverge. The audit records which claims survive, which must be withheld, and which additional observations would make behavioral explanations testable.", cards: [["Future study design", "Link treatment versions, assignment events, take-up, perceived feedback, benchmarks, withdrawal, effort, and quality."], ["Reproducible execution", "The frozen protocol, code, evidence records, and results are archived in the replication package."], ["Scope", "The prototype is reproducible conditional on its evidence coding; the retrospective applications do not independently validate that coding."]], note: "Replication package: doi:10.5281/zenodo.21458639 · Version 1.0.0." },
+        ],
+        citation: "Tang, K. (2026). Auditing behavioral claims about AI: Two public-data applications. Social Sciences & Humanities Open, 14, 103760. https://doi.org/10.1016/j.ssaho.2026.103760",
+      },
+      ja: {
+        kicker: "掲載論文 · AI · 行動の識別",
+        status: "Social Sciences & Humanities Open · 2026年",
+        title: "AIに関する行動上の主張の監査――公開データを用いた二つの応用",
+        standfirst: "AIが人の行動をどう変えるかについて、公開記録から何が言えるのでしょうか。推定対象ごとの監査を通じて、観察できる証拠と、因果効果・行動メカニズムに関する主張を整理します。",
+        author: "唐 楷博 · 大阪大学経済学部",
+        facts: [["論文種別", "Regular Article"], ["掲載誌", "Social Sciences & Humanities Open"], ["書誌情報", "第14巻 · Article 103760"], ["DOI", "10.1016/j.ssaho.2026.103760"]],
+        sections: [
+          { label: "研究の問い", title: "AIの導入から行動への影響まで、どのつながりが観察されているか。", intro: "AIツールが審査者の作業を変えても、研究対象となる反応は投稿者側に生じることがあります。導入記録だけでは、実際の利用、投稿者が受け取ったフィードバック、行動が変わった理由までは分かりません。", cards: [["推定対象を定める", "処置、分析単位、対象集団、期間、アウトカム、重み付け、比較対象を記録します。"], ["証拠をたどる", "利用可能性、実際の利用、フィードバック、認知、その後の行動を分けて確認します。"], ["主張の範囲を示す", "観察された証拠から言えることと、より強い主張に必要な情報を明らかにします。"]] },
+          { label: "監査の枠組み", title: "五つの観点を、それぞれの証拠に照らして評価する。", intro: "出典を追跡できる証拠を決定論的ルールで処理し、主張のプロファイルを作成します。不明な証拠から肯定的な結論を出さず、ある観点の強みで別の観点の欠落を埋め合わせません。", cards: [["処置の復元可能性", "利用可能性と実際の利用を混同せず、介入を記録から特定できるか。"], ["割付機構への忠実性", "実際の割付規則と例外が分析に反映されているか。"], ["対象集団とアウトカムの観察可能性", "誰の結果が観察され、対象集団がどこまで分かっているか。"], ["反実仮想の妥当性", "処置がなかった場合の経路を設計と診断が支えているか。"], ["行動メカニズムの識別可能性", "意欲低下、評判回復、注意などの説明を観察変数で区別できるか。"]], note: "出力は総合点ではなく、各観点で許される主張と保留すべき主張の記録です。" },
+          { label: "応用01 · Wikipedia", title: "導入時期は分かっても、利用と認知は分からない。", intro: "2025年のRevertRisk導入記録は、AI支援インターフェースが利用可能になった時点を示します。一方、意図的な段階導入にはランダムな割付法則がなく、審査者の利用や投稿者の認知も公開ログからは確認できません。", cards: [["記録が支えること", "導入時点の記述と、固定された観察可能な投稿者集団における記述的比較。"], ["欠測補完による到達可能区間", "記録項目と整合する補完から、一つの二値フィードバック経路について[0.017316, 0.019146]を得ます。"], ["残る課題", "この区間は因果効果を識別せず、反実仮想や行動メカニズムの欠落も解消しません。"]], note: "区間の対象は指定された固定集団の二値指標であり、非公開の投稿者や一般的な投稿数には拡張できません。" },
+          { label: "応用02 · 生成AI", title: "無作為化の設計と公開記録の復元可能性を分ける。", intro: "NoyとZhangの登録済み実験の公開ファイルには、予定された割付が記録されています。しかし、IDの重複と初回割付の履歴が解決されていないため、第三者は個人単位のITT対応関係を復元できません。", cards: [["公開ファイルの確認", "条件を満たす565回の試行に535の固有IDがあり、27のIDが重複し、17のIDが両群に現れます。"], ["異なる標本構成", "原研究の処理による453-ID標本と、最初の適格行を残す535-ID標本は、異なる規則に基づき入れ子関係にもありません。"], ["結果の解釈", "選択された標本の比較は記述的です。この結果は、原実験の無作為化が失敗した証拠ではありません。"]] },
+          { label: "貢献と再利用", title: "行動に関する主張の根拠と範囲を確認可能にする。", intro: "二つの応用は、研究設計の質と公開情報による検証可能性が一致するとは限らないことを示します。監査は、支持される主張、保留すべき主張、行動上の説明を検証するための追加観察を整理します。", cards: [["今後の研究設計", "処置の版、割付履歴、利用、知覚されたフィードバック、参照基準、離脱、努力、質を結び付けて記録します。"], ["再現可能な実行", "固定されたプロトコル、コード、証拠記録、結果を再現パッケージに収録しています。"], ["適用範囲", "再現性は証拠のコーディングを条件とします。回顧的な応用は、そのコーディングの独立した妥当性検証ではありません。"]], note: "再現パッケージ：doi:10.5281/zenodo.21458639 · Version 1.0.0。" },
+        ],
+        citation: "Tang, K. (2026). Auditing behavioral claims about AI: Two public-data applications. Social Sciences & Humanities Open, 14, 103760. https://doi.org/10.1016/j.ssaho.2026.103760",
+      },
+      zh: {
+        kicker: "正式发表 · AI · 行为识别",
+        status: "Social Sciences & Humanities Open · 2026年",
+        title: "审计关于AI的行为主张：两项公开数据应用",
+        standfirst: "公开记录究竟能告诉我们AI如何改变人的行为？本文提出针对具体估计目标的审计方法，区分可观察证据与关于因果效应、行为机制的主张。",
+        author: "唐楷博 · 大阪大学经济学部",
+        facts: [["文章类型", "Regular Article"], ["期刊", "Social Sciences & Humanities Open"], ["出版信息", "第14卷 · Article 103760"], ["DOI", "10.1016/j.ssaho.2026.103760"]],
+        sections: [
+          { label: "研究问题", title: "从AI介入到行为变化，中间哪些环节有证据？", intro: "AI工具可能改变审核者的工作流程，而研究关注的反应却发生在贡献者一侧。上线记录本身无法说明审核者是否使用工具、贡献者是否感知其反馈，以及后续行为为何改变。", cards: [["明确估计目标", "用目标卡记录处理、分析单位、目标人群、时间范围、结果、权重与待比较的差异。"], ["追溯证据链", "分别检查界面可用、实际使用、反馈送达、感知以及后续行为。"], ["界定可作出的主张", "说明每个可观察环节支持什么，以及更强结论还需要哪些证据。"]] },
+          { label: "审计框架", title: "五个维度分别审查，证据缺口不能相互抵消。", intro: "确定性的规则系统将可追溯到来源的证据转化为主张剖面。未知证据不会获准支持肯定性主张，一个维度的充分证据也不能弥补另一个维度的缺失。", cards: [["处理可恢复性", "能否从记录重建所研究的介入，并区分可用与实际使用？"], ["分配机制忠实性", "分析是否对应真实的分配规则及其例外？"], ["结果与人群可观察性", "谁的结果被观察到了，目标人群是否已知？"], ["反事实充分性", "研究设计与诊断是否支持可信的未处理路径？"], ["行为机制可区分性", "观察变量能否区分受挫退出、声誉修复、注意力等解释？"]], note: "最终输出是各维度可支持和应暂缓的主张记录，而非一项综合证据评分。" },
+          { label: "应用01 · 维基百科", title: "可观察到上线，却未必能观察到使用与感知。", intro: "2025年的RevertRisk上线记录揭示了AI辅助界面何时可用。但有目的的分批上线不构成随机分配，公开日志也没有记录审核者的使用或贡献者的感知。", cards: [["记录支持什么", "界面可用时间的陈述，以及固定可观察贡献者队列中的描述性比较。"], ["可达到的补全区间", "依据记录字段允许的缺失补全，为一个二元反馈渠道得到[0.017316, 0.019146]。"], ["尚未解决什么", "该区间不识别因果效应，也不能修复反事实路径或区分行为机制。"]], note: "这一界限仅针对指定固定队列的二元渠道，不适用于隐藏贡献者或一般贡献次数。" },
+          { label: "应用02 · 生成式AI", title: "随机化设计与公开记录的可重建性，是两个问题。", intro: "Noy与Zhang已注册实验的公开文件记录了预定分配方式，但重复标识符及尚未解决的首次分配沿革，使第三方无法从这些文件重建个人层面的意向处理映射。", cards: [["公开文件审计", "565次符合条件的尝试对应535个唯一ID，其中27个ID重复出现，17个ID出现在两个分组中。"], ["不同的样本构建", "原研究清理后的453-ID样本与审计按最早合格记录构建的535-ID样本采用不同规则，且不互为嵌套。"], ["如何解读", "选定样本的比较仍是描述性的；这一发现并不证明原实验的随机化失败。"]] },
+          { label: "贡献与复用", title: "让行为主张的证据边界可被检查。", intro: "两项应用揭示研究设计质量与公开可验证性可能分离。审计记录哪些主张成立、哪些应暂缓，以及增加哪些观察才能检验行为解释。", cards: [["未来研究设计", "关联记录处理版本、分配事件、实际使用、感知反馈、参照基准、退出、努力与质量。"], ["可复现执行", "冻结的协议、代码、证据记录与结果已整理进公开复现包。"], ["适用范围", "原型的可复现性以证据编码为条件；回顾性应用不构成对编码的独立验证。"]], note: "复现包：doi:10.5281/zenodo.21458639 · Version 1.0.0。" },
+        ],
+        citation: "Tang, K. (2026). Auditing behavioral claims about AI: Two public-data applications. Social Sciences & Humanities Open, 14, 103760. https://doi.org/10.1016/j.ssaho.2026.103760",
+      },
+    },
     "risk-friction-fit": {
       number: "1936872",
       source: LINKS.brff,
@@ -791,7 +867,7 @@
 
   const renderWork = (mode = "research") => {
     const t = COPY[language].work;
-    const order = mode === "writing" ? [0, 2, 1, 3] : [0, 1, 2, 3];
+    const order = mode === "writing" ? [0, 1, 3, 2, 4] : [0, 1, 2, 3, 4];
     const tabs = panelTabs([
       [t.tabs.research, "work/research", mode === "research"],
       [t.tabs.writing, "work/writing", mode === "writing"],
@@ -818,7 +894,7 @@
         </article>`;
     }).join("");
 
-    workPanel.innerHTML = `<div class="panel-shell">${panelHeader(t.kicker, t.title, t.intro, "work-title")}${tabs}<div class="work-list">${rows}</div><footer class="panel-footer"><span>Kaibo Tang · 唐楷博</span><span>Frontiers · SSRN</span></footer></div>`;
+    workPanel.innerHTML = `<div class="panel-shell">${panelHeader(t.kicker, t.title, t.intro, "work-title")}${tabs}<div class="work-list">${rows}</div><footer class="panel-footer"><span>Kaibo Tang · 唐楷博</span><span>Elsevier · Frontiers · SSRN</span></footer></div>`;
   };
 
   const renderContact = () => {

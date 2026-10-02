@@ -40,6 +40,7 @@
         trust: "The University of Osaka · Economics",
         lead: "Exploring how behavioral insights, institutional design, and digital public services can make public administration more accessible and effective.",
         cta: "Explore research",
+        playBackground: "Play background",
       },
       stats: { research: "Research works", published: "Published articles", subjects: "EJU subjects", languages: "Site languages" },
       profile: {
@@ -137,6 +138,7 @@
         trust: "大阪大学 · 経済学部",
         lead: "行動科学の知見、制度設計、デジタル公共サービスを通じて、行政手続と公共コミュニケーションをより利用しやすく、効果的にする方法を研究しています。",
         cta: "研究を見る",
+        playBackground: "背景を再生",
       },
       stats: { research: "研究プロジェクト", published: "掲載論文", subjects: "EJU担当科目", languages: "サイト言語" },
       profile: {
@@ -234,6 +236,7 @@
         trust: "大阪大学 · 经济学部",
         lead: "关注如何运用行为科学洞见、制度设计和数字公共服务，使行政程序与公共沟通更易使用、更具成效。",
         cta: "浏览研究",
+        playBackground: "播放背景",
       },
       stats: { research: "研究项目", published: "正式发表", subjects: "EJU课程", languages: "网站语言" },
       profile: {
@@ -666,6 +669,9 @@
   const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
   const motionBackdrop = document.querySelector(".bg");
   const video = document.querySelector(".bg-video");
+  const backgroundPlay = document.querySelector(".background-play");
+  let backgroundMotionOverride = false;
+  let backgroundPlayPending = false;
 
   let storedLanguage = null;
   try {
@@ -1338,15 +1344,54 @@
     requestBackdropFrame();
   };
 
+  const canPlayBackground = () => !document.hidden && (!reduceMotion.matches || backgroundMotionOverride);
+
+  const playBackground = () => {
+    if (!video || !canPlayBackground() || backgroundPlayPending) return;
+    // Set both DOM properties before play() for iOS inline muted autoplay.
+    video.defaultMuted = true;
+    video.muted = true;
+    video.playsInline = true;
+    backgroundPlayPending = true;
+    const attempt = video.play();
+    Promise.resolve(attempt).catch(() => {
+      if (!document.hidden) backgroundPlay.hidden = false;
+    }).finally(() => { backgroundPlayPending = false; });
+  };
+
   const syncMotion = () => {
-    if (reduceMotion.matches || document.hidden) {
+    if (!canPlayBackground()) {
       video?.pause();
-      resetBackdropMotion();
-      return;
+      if (backgroundPlay) backgroundPlay.hidden = document.hidden;
+    } else {
+      playBackground();
     }
-    video?.play().catch(() => {});
     resetBackdropMotion();
   };
+
+  video?.addEventListener("playing", () => {
+    if (backgroundPlay) backgroundPlay.hidden = true;
+    if (!canPlayBackground()) video.pause();
+  });
+  video?.addEventListener("pause", () => {
+    if (backgroundPlay && !document.hidden) backgroundPlay.hidden = false;
+  });
+  video?.addEventListener("error", () => {
+    if (backgroundPlay && !document.hidden) backgroundPlay.hidden = false;
+  });
+  video?.addEventListener("canplay", playBackground);
+  // Retry in a real user gesture after a mobile browser rejects autoplay.
+  const retryBackground = () => {
+    if (video?.paused && canPlayBackground()) playBackground();
+  };
+  document.addEventListener("touchend", retryBackground, { passive: true });
+  document.addEventListener("click", retryBackground);
+  backgroundPlay?.addEventListener("click", () => {
+    backgroundMotionOverride = true;
+    motionBackdrop.dataset.motionOverride = "true";
+    playBackground();
+  });
+  window.addEventListener("pageshow", syncMotion);
 
   burger?.addEventListener("click", () => setMenu(burger.getAttribute("aria-expanded") !== "true"));
   overlay?.addEventListener("click", () => setMenu(false, true));
@@ -1423,7 +1468,11 @@
     }
     syncMotion();
   });
-  reduceMotion.addEventListener?.("change", syncMotion);
+  reduceMotion.addEventListener?.("change", () => {
+    backgroundMotionOverride = false;
+    delete motionBackdrop.dataset.motionOverride;
+    syncMotion();
+  });
   finePointer.addEventListener?.("change", resetBackdropMotion);
 
   updateGlobalCopy();

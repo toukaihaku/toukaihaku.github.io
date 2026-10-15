@@ -1262,7 +1262,7 @@ body.menu-open {
 
 .activity-list {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   margin-top: 48px;
 }
 
@@ -1274,7 +1274,7 @@ body.menu-open {
   border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.activity-row:last-child {
+.activity-row:nth-child(even) {
   border-right: 0;
 }
 

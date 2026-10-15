@@ -11,6 +11,7 @@
     abef: "https://www.abef.jp/",
     chinichi: "https://chinichi-edu.jp/xiaoquDetail/osaka.html",
     map: "https://maps.app.goo.gl/uZMq1k3jL5CSSRwF9?g_st=ic",
+    applicationSkill: "https://github.com/toukaihaku/jp-shibou-riyuusyo",
     brff: "https://doi.org/10.3389/frbhe.2026.1936872",
     aiClaims: "https://doi.org/10.1016/j.ssaho.2026.103760",
     brffPdf: "https://www.frontiersin.org/journals/behavioral-economics/articles/10.3389/frbhe.2026.1936872/pdf",
@@ -63,8 +64,9 @@
         ],
         activities: [
           ["01", "Part-time teaching", "Chinichi Juku Osaka", "EJU Japanese · Japan and the World · Mathematics Course 1", "Instructor · Osaka", "#teaching/chinichi-osaka"],
-          ["02", "Research support", "Undergraduate Independent Research Program", "Information Frictions, Ethnic Networks, and Part-Time Wage Gaps among Chinese International Students in Japan", "The University of Osaka · Jul–Dec 2026", LINKS.independentResearch],
-          ["03", "Academic membership", "Association of Behavioral Economics and Finance", "Student Member", "Since July 2026", LINKS.abef],
+          ["02", "Skill development", "Japanese university application writing", "A Codex skill for Chinese applicants to Japanese undergraduate programs: school research, interview-based drafting, revision, and word-limit editing, with guidance in Chinese and writing in Japanese.", "Developer · jp-shibou-riyuusyo", LINKS.applicationSkill, "View on GitHub"],
+          ["03", "Research support", "Undergraduate Independent Research Program", "Information Frictions, Ethnic Networks, and Part-Time Wage Gaps among Chinese International Students in Japan", "The University of Osaka · Jul–Dec 2026", LINKS.independentResearch],
+          ["04", "Academic membership", "Association of Behavioral Economics and Finance", "Student Member", "Since July 2026", LINKS.abef],
         ],
       },
       work: {
@@ -161,8 +163,9 @@
         ],
         activities: [
           ["01", "アルバイト・教育経験", "知日塾 大阪校", "EJU日本語 · 総合科目 · 文科数学", "講師 · 大阪", "#teaching/chinichi-osaka"],
-          ["02", "研究支援", "学部学生による自主研究奨励事業", "日本の中国人留学生における情報摩擦、エスニック・ネットワークとアルバイト賃金格差", "大阪大学 · 2026年7月–12月", LINKS.independentResearch],
-          ["03", "学会所属", "行動経済学会", "学生会員", "2026年7月より", LINKS.abef],
+          ["02", "スキル開発", "志望理由書作成支援スキル", "日本の大学学部を志望する中国人留学生向けのCodexスキル。大学公式情報の調査、対話を通じた下書き、推敲、字数調整に対応し、中国語で相談しながら日本語の志望理由書を作成できます。", "開発者 · jp-shibou-riyuusyo", LINKS.applicationSkill, "GitHubで見る"],
+          ["03", "研究支援", "学部学生による自主研究奨励事業", "日本の中国人留学生における情報摩擦、エスニック・ネットワークとアルバイト賃金格差", "大阪大学 · 2026年7月–12月", LINKS.independentResearch],
+          ["04", "学会所属", "行動経済学会", "学生会員", "2026年7月より", LINKS.abef],
         ],
       },
       work: {
@@ -259,8 +262,9 @@
         ],
         activities: [
           ["01", "兼职教学", "知日塾大阪校", "EJU日语 · 综合科目 · 文科数学", "讲师 · 大阪", "#teaching/chinichi-osaka"],
-          ["02", "研究支持", "本科生自主研究项目", "在日中国留学生的信息摩擦、族群网络与兼职工资差距", "大阪大学 · 2026年7月–12月", LINKS.independentResearch],
-          ["03", "学术会员", "日本行为经济学会", "学生会员", "自2026年7月起", LINKS.abef],
+          ["02", "Skill 开发", "日本大学志望理由书辅导", "面向申请日本大学学部的中国留学生开发的 Codex skill，支持学校官网资料查询、访谈起草、修改现稿、压缩字数与更换目标学校，以中文沟通、日语撰写正文。", "开发者 · jp-shibou-riyuusyo", LINKS.applicationSkill, "在 GitHub 查看"],
+          ["03", "研究支持", "本科生自主研究项目", "在日中国留学生的信息摩擦、族群网络与兼职工资差距", "大阪大学 · 2026年7月–12月", LINKS.independentResearch],
+          ["04", "学术会员", "日本行为经济学会", "学生会员", "自2026年7月起", LINKS.abef],
         ],
       },
       work: {
@@ -859,12 +863,12 @@
           </a>`).join("")}
       </div>
       <div class="activity-list">
-        ${t.activities.map(([number, label, title, body, meta, href]) => `
+        ${t.activities.map(([number, label, title, body, meta, href, linkLabel]) => `
           <article class="activity-row">
             <span class="activity-index">${escapeHTML(number)} · ${escapeHTML(label)}</span>
             <h3>${escapeHTML(title)}</h3><p>${escapeHTML(body)}</p>
             <span class="activity-meta">${escapeHTML(meta)}</span>
-            <a class="inline-link" href="${href}"${externalAttrs(href)}>${COPY[language].common.detail} <span aria-hidden="true">↗</span></a>
+            <a class="inline-link" href="${href}"${externalAttrs(href)}>${escapeHTML(linkLabel || COPY[language].common.detail)} <span aria-hidden="true">↗</span></a>
           </article>`).join("")}
       </div>`;
 
